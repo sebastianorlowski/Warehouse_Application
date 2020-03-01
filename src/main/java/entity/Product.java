@@ -54,6 +54,14 @@ public class Product {
         return material;
     }
 
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public void setProductCount(Integer productCount) {
+        this.productCount = productCount;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

@@ -1,16 +1,16 @@
 package entity;
-
+import enums.Color;
 public class Product {
     private Long id;
     private String name;
     private Float price;
     private Float weight;
-    private String color;
+    private Color color;
     private Integer productCount;
     private String size;
     private String material;
 
-    public Product(Long id, String name, Float price, Float weight, String color,
+    public Product(Long id, String name, Float price, Float weight, Color color,
                    Integer productCount, String size, String material) {
         this.id = id;
         this.name = name;
@@ -38,7 +38,7 @@ public class Product {
         return weight;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 

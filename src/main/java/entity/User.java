@@ -1,13 +1,24 @@
 package entity;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class User {
     private Long id;
     private String login;
     private String password;
     private String email;
 
+
+
     public User(Long id, String login, String password, String email) {
         this.id = id;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User(String login, String password, String email) {
         this.login = login;
         this.password = password;
         this.email = email;

@@ -1,9 +1,5 @@
 package validators;
 
-/*
-login - min 5, max 20,
-password - min 8, max 20, musi zawierać liczby
- */
 public class UserValidator {
 
     private final int LOGIN_MIN_LENGTH = 5;

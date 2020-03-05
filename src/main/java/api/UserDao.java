@@ -11,7 +11,8 @@ public interface UserDao {
     List<User> users = new LinkedList<User>();
 
     void addUser(User user);
-    void removeUser(String login); /* remove by login */
+    void removeUserById(Long id);
+    void removeUserByLogin(String login);
     void updateUserPassword(String login, String password);
     void updateUserEmail(String login, String email);
     List<User> getAllUsers();

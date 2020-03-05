@@ -9,8 +9,6 @@ public class Cloth extends Product {
         super(id, name, price, weight, color, productCount, size, material);
     }
 
-
-
     public String toString() {
         return super.toString();
     }

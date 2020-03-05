@@ -101,10 +101,10 @@ public class ProductDaoImpl implements ProductDao {
 
     public List<Product> getAllProducts( ){
         List<Product> products = new LinkedList<Product>();
-        Statement statement;
-        try {
-            statement = connection.createStatement();
+        PreparedStatement statement;
+        try  {
             query = "select * from " + tableName;
+            statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
             /* (name, price, weight, color, product count, size, material */
             while(resultSet.next()) {
@@ -112,7 +112,7 @@ public class ProductDaoImpl implements ProductDao {
                 String name = resultSet.getString("name");
                 Float price = resultSet.getFloat("price");
                 Float weight = resultSet.getFloat("weight");
-                String color = resultSet.getString(("color"));
+                Color color = Color.valueOf(resultSet.getString(("color")));
                 Integer productCount = resultSet.getInt("productcount");
                 String size = resultSet.getString("size");
                 String material = resultSet.getString("material");
@@ -125,5 +125,6 @@ public class ProductDaoImpl implements ProductDao {
         catch (SQLException e) {
             e.printStackTrace();
         }
+        return products;
     }
 }

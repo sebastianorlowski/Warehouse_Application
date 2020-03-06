@@ -5,7 +5,7 @@ import entity.User;
 
 public class UserImpl implements UserDao {
 
-    public void addUser(User user) {
+    boolean addUser(User user) {
 
     }
 

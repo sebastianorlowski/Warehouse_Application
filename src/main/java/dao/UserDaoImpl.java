@@ -8,6 +8,16 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
+
+    private static UserDaoImpl instance = null;
+
+    public static UserDaoImpl getInstance() {
+        if(instance == null) {
+            instance = new UserDaoImpl();
+        }
+        return instance;
+    }
+
     private Connection connection;
     private final String databaseName = "warehouse";
     private final String tableName = "users";
@@ -82,7 +92,7 @@ public class UserDaoImpl implements UserDao {
             statement = connection.prepareStatement(query);
             statement.setString(1, password);
             statement.setString(2, login);
-            statement.execute();
+            statement.executeUpdate();
 
             statement.close();
         }
@@ -99,7 +109,7 @@ public class UserDaoImpl implements UserDao {
             statement = connection.prepareStatement(query);
             statement.setString(1, email);
             statement.setString(2, login);
-            statement.execute();
+            statement.executeUpdate(query);
 
             statement.close();
         }

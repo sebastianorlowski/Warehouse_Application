@@ -90,7 +90,7 @@ public class ProductDaoImpl implements ProductDao {
             statement.setInt(5, product.getProductCount());
             statement.setString(6, product.getSize());
             statement.setString(7, product.getMaterial());
-            statement.execute();
+            statement.executeUpdate();
 
             statement.close();
         }

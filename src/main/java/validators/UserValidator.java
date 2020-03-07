@@ -4,6 +4,7 @@ import api.UserDao;
 import dao.UserDaoImpl;
 import entity.User;
 import exceptions.user.UserLoginEnoughLengthException;
+import exceptions.user.UserLoginIsExistException;
 import exceptions.user.UserPasswordEnoughLengthException;
 import exceptions.user.UserPasswordIsOneCharUpCaseException;
 
@@ -29,38 +30,43 @@ public class UserValidator {
     private final int PASSWORD_MIN_LENGTH = 8;
     private final int PASSWORD_MAX_LENGTH = 20;
 
-    public boolean isValidateAddUser(User user) throws UserLoginEnoughLengthException, UserPasswordEnoughLengthException, UserPasswordIsOneCharUpCaseException {
+    public boolean isValidateAddUser(User user) throws UserLoginIsExistException, UserLoginEnoughLengthException, UserPasswordEnoughLengthException,
+            UserPasswordIsOneCharUpCaseException {
         if(isLoginEnoughLength(user.getLogin())) {
-            throw new UserLoginEnoughLengthException("Login can be minimum 5 and maximum 20 letters!");
+            throw new UserLoginEnoughLengthException("Login must be minimum 5 and maximum 20 letters!");
         }
             if(isPasswordEnoughLength(user.getPassword())) {
-                throw new UserPasswordEnoughLengthException("Password can be minimum 8 and maximum 20 letters!");
+                throw new UserPasswordEnoughLengthException("Password must be minimum 8 and maximum 20 letters!");
             }
 
             if(isPasswordOneCharUpperCase(user.getPassword())) {
                 throw new UserPasswordIsOneCharUpCaseException("Password must have one uppercase letter!");
             }
+
+            if (isUserAlreadyExist(user.getLogin())) {
+                throw new UserLoginIsExistException("Login is exist!");
+            }
         return true;
     }
 
     private boolean isLoginEnoughLength(String login) {
-        return login.length() >= LOGIN_MIN_LENGTH && login.length() <= LOGIN_MAX_LENGTH;
+        return login.length() < LOGIN_MIN_LENGTH || login.length() > LOGIN_MAX_LENGTH;
     }
 
     private boolean isPasswordEnoughLength(String password) {
-        return password.length() >= PASSWORD_MIN_LENGTH && password.length() <= PASSWORD_MAX_LENGTH;
+        return password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH;
     }
 
     private boolean isPasswordOneCharUpperCase(String password) {
         for(char checkUpperCase : password.toCharArray()) {
             if(Character.isUpperCase(checkUpperCase)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
-    private boolean isUserExist(String login) {
+    private boolean isUserAlreadyExist(String login) {
         List<User> users = null;
         users = userDao.getAllUsers();
         for(User user : users) {

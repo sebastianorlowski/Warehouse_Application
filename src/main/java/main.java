@@ -1,5 +1,8 @@
 import api.UserDao;
+import api.UserService;
+import dao.UserDaoImpl;
 import entity.User;
+import service.UserImpl;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -7,23 +10,31 @@ import java.util.Scanner;
 
 public class main {
 
+    private static UserDao userDao = UserDaoImpl.getInstance();
+    private static UserService userService = UserImpl.getInstance();
+
 
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        List<User> users = new LinkedList<User>();
-
-        System.out.println("Hello");
-        System.out.print("Please enter your login ");
+        System.out.println("Hello, please register!");
+        System.out.println("Login ");
         String login = scanner.next();
-        System.out.println();
-        System.out.print("Please enter your password ");
+        System.out.println("Password ");
         String password = scanner.next();
-        System.out.println();
-        System.out.println("Please enter your email ");
+        System.out.println("Email ");
         String email = scanner.next();
 
         User user = new User(login, password, email);
-        users.add(user);
-        UserDao userDao = new UserDao(users);
+        userService.addUser(user);
+
+        System.out.println("Pleae give me id user to delete");
+        Long id = scanner.nextLong();
+
+        userService.removeUserById(id);
+
+
+
+
+
     }
 }

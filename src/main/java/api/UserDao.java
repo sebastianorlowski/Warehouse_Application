@@ -15,6 +15,8 @@ public interface UserDao {
     void removeUserByLogin(String login);
     void updateUserPassword(String login, String password);
     void updateUserEmail(String login, String email);
+    void findUserById(Long id);
+    void findUserByLogin(String login);
     List<User> getAllUsers();
 
 }

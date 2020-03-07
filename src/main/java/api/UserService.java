@@ -20,6 +20,6 @@ public interface UserService {
     User findUserById(Long id);
     User findUserByLogin(String login);
     List<User> getAllUsers();
-    boolean isCorrectLoginAndPassword(String login, String password);
+   /* boolean isCorrectLoginAndPassword(String login, String password); */
 
 }

@@ -1,6 +1,16 @@
 package validators;
 
+import api.UserDao;
+import dao.UserDaoImpl;
+import entity.User;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class UserValidator {
+
+    private UserDao userDao = UserDaoImpl.getInstance();
 
     private final int LOGIN_MIN_LENGTH = 5;
     private final int LOGIN_MAX_LENGTH = 20;
@@ -18,6 +28,17 @@ public class UserValidator {
     private boolean isPasswordOneCharUpperCase(String password) {
         for(char checkUpperCase : password.toCharArray()) {
             if(Character.isUpperCase(checkUpperCase)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isUserExist(String login) {
+        List<User> users = null;
+        users = userDao.getAllUsers();
+        for(User user : users) {
+            if(user.getLogin().equals(login)) {
                 return true;
             }
         }

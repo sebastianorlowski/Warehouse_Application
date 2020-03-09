@@ -13,8 +13,8 @@ public interface UserDao {
     void addUser(User user);
     void removeUserById(Long id);
     void removeUserByLogin(String login);
-    void updateUserPassword(String login, String password);
-    void updateUserEmail(String login, String email);
+    void updateUserPassword(String login, String password, String newPassword);
+    void updateUserEmail(String login, String email, String newEmail);
     void findUserById(Long id);
     void findUserByLogin(String login);
     List<User> getAllUsers();

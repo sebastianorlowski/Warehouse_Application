@@ -27,10 +27,15 @@ public class main {
         User user = new User(login, password, email);
         userService.addUser(user);
 
-        System.out.println("Pleae give me id user to delete");
-        Long id = scanner.nextLong();
+        System.out.println("Please give me login and password to change password");
+        System.out.println("Login: ");
+        String loginToChange = scanner.next();
+        System.out.println("Password: ");
+        String passwordToChange = scanner.next();
+        System.out.println("New Password: ");
+        String newPassword = scanner.next();
 
-        userService.removeUserById(id);
+        userService.updateUserPassword(loginToChange, passwordToChange, newPassword);
 
 
 

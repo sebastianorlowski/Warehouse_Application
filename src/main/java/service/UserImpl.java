@@ -25,7 +25,7 @@ public class UserImpl implements UserService {
         }
         return instance;
     }
-    /* Sprawdź długość loginu, hasła, czy użytkownik istnieje, */
+
     public boolean addUser(User user)  {
         try {
             if(userValidator.isValidateAddUser(user)) {
@@ -38,34 +38,71 @@ public class UserImpl implements UserService {
         return false;
     }
 
-    /* Sprawdź czy istnieje użytk. o tym id, zwróć jego id i login*/
-    public void removeUserById(Long id) {
+    public User removeUserById(Long id) {
         List<User> users = null;
         users = userDao.getAllUsers();
         try {
-        for(User user : users) {
-            if (id.equals(user.getId())) {
-                System.out.println("You removed user " + user.getLogin());
-                userDao.removeUserById(id);
+            if(findUserById(id) != null) {
+                for (User user : users) {
+                    if (id.equals(user.getId())) {
+                        System.out.println("You removed user " + user.getLogin());
+                        userDao.removeUserById(id);
+                    }
+                }
             }
+            else {
+                System.out.println("This user is not exist!");
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public User removeUserByLogin(String login) {
+        List<User> users = null;
+        users = userDao.getAllUsers();
+        try {
+            if (findUserByLogin(login) != null) {
+                for (User user : users) {
+                    if (login.equals(user.getLogin())) {
+                        System.out.println("You removed user " + user.getLogin());
+                        userDao.removeUserByLogin(login);
+                    }
+                }
+            }
+            else {
+                System.out.println("This user is not exist!");
             }
         }
         catch (Exception e) {
-            System.out.println("This user is not exist!");
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
-    /* Sprawdź czy istnieje użytk. o tym loginie, zwróć jego id i login */
-    public void removeUserByLogin(String login) {
-
+    public User updateUserPassword(String login, String password, String newPassword) {
+        List<User> users = null;
+        users = userDao.getAllUsers();
+        for(User user : users) {
+            if(login.equals(user.getLogin()) && password.equals(user.getPassword())) {
+                userDao.updateUserPassword(login, password, newPassword);
+            }
+        }
+        return null;
     }
 
-    public void updateUserPassword(String login, String password) {
-
-    }
-
-    public void updateUserEmail(String login, String email) {
-
+    public User updateUserEmail(String login, String email, String newEmail) {
+        List<User> users = null;
+        users = userDao.getAllUsers();
+        for(User user : users) {
+            if(login.equals(user.getLogin()) && email.equals(user.getPassword())) {
+                userDao.updateUserPassword(login, email, newEmail);
+            }
+        }
+        return null;
     }
 
     /* Sprawdź czy użytkownik istnieje, czy id zostało poprawnie wpisane(jest liczbą 0-9), zwróć id, login*/

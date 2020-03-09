@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
     public void removeUserById(Long id) {
         PreparedStatement statement;
         try {
-            String query = "delete from " + tableName + " where id = ? ";
+            String query = "delete from " + tableName + " where id = ?";
             statement = connection.prepareStatement(query);
             statement.setLong(1, id);
 
@@ -73,7 +73,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement;
 
         try {
-            String query = "delete from " + tableName + " where login = ? ";
+            String query = "delete from " + tableName + " where login = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, login);
 
@@ -85,14 +85,15 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    public void updateUserPassword(String login, String password) {
+    public void updateUserPassword(String login, String password, String newPassword) {
         PreparedStatement statement;
 
         try {
-            String query = "update " + tableName + " set password = ? where login = ?";
+            String query = "update " + tableName + " set password = ? where login = ? and password = ?";
             statement = connection.prepareStatement(query);
-            statement.setString(1, password);
+            statement.setString(1, newPassword);
             statement.setString(2, login);
+            statement.setString(3, password);
             statement.executeUpdate();
 
             statement.close();
@@ -102,14 +103,15 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    public void updateUserEmail(String login, String email) {
+    public void updateUserEmail(String login, String email, String newEmail) {
         PreparedStatement statement;
 
         try {
-            String query = "update " + tableName + " set email = ? where login = ?";
+            String query = "update " + tableName + " set email = ? where login = ? and email = ?";
             statement = connection.prepareStatement(query);
-            statement.setString(1, email);
+            statement.setString(1, newEmail);
             statement.setString(2, login);
+            statement.setString(3, email);
             statement.executeUpdate(query);
 
             statement.close();

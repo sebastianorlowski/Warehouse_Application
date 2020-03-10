@@ -4,6 +4,7 @@ import api.UserDao;
 import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
+import exceptions.user.UserLoginAndPasswordIsCorrect;
 import exceptions.user.UserLoginEnoughLengthException;
 import exceptions.user.UserLoginIsExistException;
 import exceptions.user.UserPasswordEnoughLengthException;
@@ -20,19 +21,18 @@ public class UserImpl implements UserService {
     private static UserImpl instance = null;
 
     public static UserImpl getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserImpl();
         }
         return instance;
     }
 
-    public boolean addUser(User user)  {
+    public boolean addUser(User user) {
         try {
-            if(userValidator.isValidateAddUser(user)) {
+            if (userValidator.isValidateAddUser(user)) {
                 userDao.addUser(user);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return false;
@@ -42,20 +42,18 @@ public class UserImpl implements UserService {
         List<User> users = null;
         users = userDao.getAllUsers();
         try {
-            if(findUserById(id) != null) {
+            if (findUserById(id) != null) {
                 for (User user : users) {
                     if (id.equals(user.getId())) {
                         System.out.println("You removed user " + user.getLogin());
                         userDao.removeUserById(id);
                     }
                 }
-            }
-            else {
+            } else {
                 System.out.println("This user is not exist!");
             }
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -72,12 +70,10 @@ public class UserImpl implements UserService {
                         userDao.removeUserByLogin(login);
                     }
                 }
-            }
-            else {
+            } else {
                 System.out.println("This user is not exist!");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -86,10 +82,15 @@ public class UserImpl implements UserService {
     public User updateUserPassword(String login, String password, String newPassword) {
         List<User> users = null;
         users = userDao.getAllUsers();
-        for(User user : users) {
-            if(login.equals(user.getLogin()) && password.equals(user.getPassword())) {
-                userDao.updateUserPassword(login, password, newPassword);
+        try {
+            for (User user : users) {
+                if (login.equals(user.getLogin()) && password.equals(user.getPassword())) {
+                    if (userValidator.isValidateUpdateUserPassword(newPassword))
+                        userDao.updateUserPassword(login, password, newPassword);
+                }
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -97,32 +98,30 @@ public class UserImpl implements UserService {
     public User updateUserEmail(String login, String email, String newEmail) {
         List<User> users = null;
         users = userDao.getAllUsers();
-        for(User user : users) {
-            if(login.equals(user.getLogin()) && email.equals(user.getPassword())) {
+        for (User user : users) {
+            if (login.equals(user.getLogin()) && email.equals(user.getPassword())) {
                 userDao.updateUserPassword(login, email, newEmail);
             }
         }
         return null;
     }
 
-    /* Sprawdź czy użytkownik istnieje, czy id zostało poprawnie wpisane(jest liczbą 0-9), zwróć id, login*/
     public User findUserById(Long id) {
         List<User> users = null;
         users = userDao.getAllUsers();
-        for(User user : users) {
-            if(id == user.getId()) {
+        for (User user : users) {
+            if (id == user.getId()) {
                 return user;
             }
         }
         return null;
     }
 
-    /* Sprawdź czy użytkownik istnieje, czy login jest poprawnie wpisany(a-z), zwróc id, login */
     public User findUserByLogin(String login) {
         List<User> users = null;
         users = userDao.getAllUsers();
-        for(User user : users) {
-            if(login.equals(user.getId())) {
+        for (User user : users) {
+            if (login.equals(user.getId())) {
                 return user;
             }
         }
@@ -133,10 +132,10 @@ public class UserImpl implements UserService {
         return userDao.getAllUsers();
     }
 
-    /* Sprawdź czy login istnieje, czy poprawne jest hasło do loginu */
-  /*  public boolean isCorrectLoginAndPassword(String login, String password) {
-
+    public boolean isCorrectLoginAndPassword(String login, String password) {
+        if (userDao.isCorrectLoginAndPassword(login,password)) {
+            return true;
+        }
+        return false;
     }
-
-   */
 }

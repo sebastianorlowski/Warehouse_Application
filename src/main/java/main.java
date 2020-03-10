@@ -16,30 +16,12 @@ public class main {
 
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        System.out.println("Hello, please register!");
-        System.out.println("Login ");
-        String login = scanner.next();
-        System.out.println("Password ");
-        String password = scanner.next();
-        System.out.println("Email ");
-        String email = scanner.next();
-
-        User user = new User(login, password, email);
-        userService.addUser(user);
-
-        System.out.println("Please give me login and password to change password");
+        System.out.println("Is correct login and password");
         System.out.println("Login: ");
-        String loginToChange = scanner.next();
+        String login = scanner.next();
         System.out.println("Password: ");
-        String passwordToChange = scanner.next();
-        System.out.println("New Password: ");
-        String newPassword = scanner.next();
-
-        userService.updateUserPassword(loginToChange, passwordToChange, newPassword);
-
-
-
-
+        String password = scanner.next();
+        System.out.println(userService.isCorrectLoginAndPassword(login, password));
 
     }
 }

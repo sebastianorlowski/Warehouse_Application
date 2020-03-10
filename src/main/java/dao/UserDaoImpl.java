@@ -123,11 +123,11 @@ public class UserDaoImpl implements UserDao {
 
     public List<User> getAllUsers() {
         List<User> users = new LinkedList<User>();
-        Statement statement = null;
+        PreparedStatement statement;
 
         try {
-            statement = connection.createStatement();
             String query = "select * from " + tableName;
+            statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {
@@ -148,10 +148,11 @@ public class UserDaoImpl implements UserDao {
      }
 
      public void findUserById(Long id) {
-        Statement statement = null;
+        PreparedStatement statement;
+
         try {
-            statement = connection.createStatement();
             String query = "select * from " + tableName + " where id = " + id;
+            statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {
@@ -163,6 +164,7 @@ public class UserDaoImpl implements UserDao {
                 User user = new User(id, login, password, email);
                 users.add(user);
             }
+            statement.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -171,10 +173,10 @@ public class UserDaoImpl implements UserDao {
       }
 
     public void findUserByLogin(String login) {
-        Statement statement = null;
+        PreparedStatement statement;
         try {
-            statement = connection.createStatement();
-            String query = "select * from " + tableName + " where login = " + login;
+            String query = "select * from " + tableName + " where login = '" + login + "';";
+            statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {
@@ -184,13 +186,32 @@ public class UserDaoImpl implements UserDao {
                 String email = resultSet.getString("email");
 
                 User user = new User(id, login, password, email);
-                users.add(user);
+                System.out.println(user);
             }
+            statement.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(user);
+
+    }
+
+    public boolean isCorrectLoginAndPassword(String login, String password) {
+        PreparedStatement statement;
+        try {
+            if (login != null && password != null) {
+                String query = "select * from " + tableName + " where login = '" + login + "' and password = '" + password + "';";
+                statement = connection.prepareStatement(query);
+                ResultSet resultSet = statement.executeQuery(query);
+                if(resultSet.next()) {
+                    return true;
+                }
+            }
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
 

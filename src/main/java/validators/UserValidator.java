@@ -1,12 +1,11 @@
 package validators;
 
 import api.UserDao;
+import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
-import exceptions.user.UserLoginEnoughLengthException;
-import exceptions.user.UserLoginIsExistException;
-import exceptions.user.UserPasswordEnoughLengthException;
-import exceptions.user.UserPasswordIsOneCharUpCaseException;
+import exceptions.user.*;
+import service.UserImpl;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -49,6 +48,20 @@ public class UserValidator {
         return true;
     }
 
+    public boolean isValidateUpdateUserPassword(String newPassword) throws UserPasswordEnoughLengthException,
+            UserPasswordIsOneCharUpCaseException{
+
+
+        if(isPasswordEnoughLength(newPassword)) {
+            throw new UserPasswordEnoughLengthException("Password must be minimum 8 and maximum 20 letters!");
+        }
+
+        if(isPasswordOneCharUpperCase(newPassword) == false) {
+            throw new UserPasswordIsOneCharUpCaseException("Password must have one uppercase letter!");
+        }
+        return true;
+    }
+
     private boolean isLoginEnoughLength(String login) {
         return login.length() < LOGIN_MIN_LENGTH || login.length() > LOGIN_MAX_LENGTH;
     }
@@ -60,10 +73,10 @@ public class UserValidator {
     private boolean isPasswordOneCharUpperCase(String password) {
         for(char checkUpperCase : password.toCharArray()) {
             if(Character.isUpperCase(checkUpperCase)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean isUserAlreadyExist(String login) {

@@ -56,7 +56,7 @@ public class UserValidator {
             throw new UserPasswordEnoughLengthException("Password must be minimum 8 and maximum 20 letters!");
         }
 
-        if(isPasswordOneCharUpperCase(newPassword) == false) {
+        if(isPasswordOneCharUpperCase(newPassword)) {
             throw new UserPasswordIsOneCharUpCaseException("Password must have one uppercase letter!");
         }
         return true;
@@ -73,10 +73,10 @@ public class UserValidator {
     private boolean isPasswordOneCharUpperCase(String password) {
         for(char checkUpperCase : password.toCharArray()) {
             if(Character.isUpperCase(checkUpperCase)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private boolean isUserAlreadyExist(String login) {

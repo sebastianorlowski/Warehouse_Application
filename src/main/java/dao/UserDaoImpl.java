@@ -8,9 +8,7 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
-
     private final static UserDao instance = new UserDaoImpl();
-
 
     private Connection connection;
     private final String databaseName = "warehouse";
@@ -193,7 +191,6 @@ public class UserDaoImpl implements UserDao {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public boolean isCorrectLoginAndPassword(String login, String password) {

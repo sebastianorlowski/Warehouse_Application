@@ -4,13 +4,8 @@ import api.UserDao;
 import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
-import exceptions.user.UserLoginAndPasswordIsCorrect;
-import exceptions.user.UserLoginEnoughLengthException;
-import exceptions.user.UserLoginIsExistException;
-import exceptions.user.UserPasswordEnoughLengthException;
 import validators.UserValidator;
 
-import java.io.IOException;
 import java.util.List;
 
 public class UserImpl implements UserService {

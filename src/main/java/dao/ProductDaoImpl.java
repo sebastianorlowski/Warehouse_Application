@@ -10,6 +10,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
+
+    private static ProductDao instance = new ProductDaoImpl();
+
+    public static ProductDao getInstance() {
+        return ProductDaoImpl.instance;
+    }
+
     private Connection connection;
     private final String databaseName = "warehouse";
     private String tableName = "product";

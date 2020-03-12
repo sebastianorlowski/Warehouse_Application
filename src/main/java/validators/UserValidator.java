@@ -51,7 +51,6 @@ public class UserValidator {
     public boolean isValidateUpdateUserPassword(String newPassword) throws UserPasswordEnoughLengthException,
             UserPasswordIsOneCharUpCaseException{
 
-
         if(isPasswordEnoughLength(newPassword)) {
             throw new UserPasswordEnoughLengthException("Password must be minimum 8 and maximum 20 letters!");
         }

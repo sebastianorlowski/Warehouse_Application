@@ -13,6 +13,15 @@ import java.util.List;
 public class ProductValidator {
     private ProductDao productDao = ProductDaoImpl.getInstance();
 
+    private static ProductValidator instance = null;
+
+    public static ProductValidator getInstance() {
+        if(instance == null) {
+            instance = new ProductValidator();
+        }
+        return instance;
+    }
+
     private final int MAX_NAME_LENGTH = 50;
     private final float MIN_PRICE = 0.0f;
     private final float MIN_WEIGHT = 0.0f;
@@ -37,6 +46,23 @@ public class ProductValidator {
         }
         if(productIsAlreadyExist(product.getName())) {
             throw new ProductIsAlreadyExist("Product is already exist!");
+        }
+        return true;
+    }
+
+    public boolean isValidateUpdateProduct(Product product) throws ProductNameCannotBeEmptyException, ProductNameEnoughLengthException,
+            ProductPriceMinimumException, ProductWeightMinimumException {
+        if (productNameEmpty(product.getName())) {
+            throw new ProductNameCannotBeEmptyException("Product name cannot be empty!");
+        }
+        if (productNameEnoughLength(product.getName())) {
+            throw new ProductNameEnoughLengthException("Product name is too long! Maximum 50 letters!");
+        }
+        if (productPriceMinimum(product.getPrice())) {
+            throw new ProductPriceMinimumException("Product price cannot be 0 or less!");
+        }
+        if (productWeightMinimum(product.getWeight())) {
+            throw new ProductWeightMinimumException("Product weight cannot be 0 or less!");
         }
         return true;
     }
@@ -72,6 +98,15 @@ public class ProductValidator {
         return false;
     }
 
-
+    private boolean productIsAlreadyExistId(Long id){
+        List<Product> products = null;
+        products = productDao.getAllProducts();
+        for(Product product : products) {
+            if(id.equals(product.getId())) {
+                return id;
+            }
+        }
+        return false;
+    }
 
 }

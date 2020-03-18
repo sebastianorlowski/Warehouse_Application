@@ -19,6 +19,7 @@ public interface UserService {
     User updateUserEmail(String login, String email, String newEmail);
     User findUserById(Long id);
     User findUserByLogin(String login);
+    User findUserByEmail(String email);
     List<User> getAllUsers();
     boolean isCorrectLoginAndPassword(String login, String password);
 

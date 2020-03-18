@@ -87,7 +87,7 @@ public class ProductValidator {
         return weight <= MIN_WEIGHT;
     }
 
-    private boolean productIsAlreadyExist(String productName){
+    public boolean productIsAlreadyExist(String productName){
         List<Product> products = null;
         products = productDao.getAllProducts();
         for(Product product : products) {
@@ -98,12 +98,12 @@ public class ProductValidator {
         return false;
     }
 
-    private boolean productIsAlreadyExistId(Long id){
+    public boolean productIsAlreadyExistId(Long id){
         List<Product> products = null;
         products = productDao.getAllProducts();
         for(Product product : products) {
             if(id.equals(product.getId())) {
-                return id;
+                return true;
             }
         }
         return false;

@@ -123,6 +123,17 @@ public class UserImpl implements UserService {
         return null;
     }
 
+    public User findUserByEmail(String email) {
+        List<User> users = null;
+        users = userDao.getAllUsers();
+        for(User user : users) {
+            if(email.equals(user.getEmail())) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }

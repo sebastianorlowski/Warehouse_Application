@@ -1,14 +1,15 @@
 package api;
 
 import entity.Product;
+import enums.Color;
 
 import java.util.List;
 
 public interface ProductService {
     boolean addProduct(Product product);
-    boolean removeProductById(Long id);
-    boolean removeProductByName(String productName);
-    boolean updateProduct(Product product);
+    Product removeProductById(Long id);
+    Product removeProductByName(String productName);
+    void updateProduct(Product product);
     Product findProductByName(String productName);
     Product findProductById(Long id);
     List<Product> getAllProducts();

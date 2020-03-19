@@ -161,13 +161,13 @@ public class UserDaoImpl implements UserDao {
 
                 User user = new User(id, login, password, email);
                 users.add(user);
+                System.out.println(user);
             }
             statement.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-         System.out.println(user);
       }
 
     public void findUserByLogin(String login) {
@@ -203,6 +203,7 @@ public class UserDaoImpl implements UserDao {
                 if(resultSet.next()) {
                     return true;
                 }
+                statement.close();
             }
         }
         catch(SQLException e) {

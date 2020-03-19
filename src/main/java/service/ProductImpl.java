@@ -13,6 +13,11 @@ public class ProductImpl implements ProductService {
     private ProductValidator productValidator = ProductValidator.getInstance();
     private ProductDao productDao = ProductDaoImpl.getInstance();
 
+    private static ProductService instance = new ProductImpl();
+    public static ProductService getInstance() {
+        return ProductImpl.instance;
+    }
+
     public boolean addProduct(Product product) {
         try {
             if (productValidator.isValidateProduct(product)) {

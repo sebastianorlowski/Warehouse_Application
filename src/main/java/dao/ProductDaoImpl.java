@@ -3,8 +3,8 @@ package dao;
 import api.ProductDao;
 import entity.Product;
 import enums.Color;
+import service.ProductImpl;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,9 +24,13 @@ public class ProductDaoImpl implements ProductDao {
     private final String password = "respeck";
     String query;
 
-    public void connectToSql() {
+    public ProductDaoImpl() {
+        init();
+    }
+
+    public void init() {
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?useSSL=false" , user, password);
         }
         catch (Exception e) {
@@ -37,7 +41,7 @@ public class ProductDaoImpl implements ProductDao {
     public void addProduct(Product product) {
         PreparedStatement statement;
         try {
-            query = "insert into " + tableName + " (name, price, weight, color, product count, size, material) values ?, ?, ?, ?, ?, ?, ? ";
+            query = "insert into " + tableName + " (name, price, weight, color, product count, size, material) values (?, ?, ?, ?, ?, ?, ?) ";
             statement = connection.prepareStatement(query);
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getPrice());
@@ -73,7 +77,7 @@ public class ProductDaoImpl implements ProductDao {
     public void removeProductByName(String productName) {
         PreparedStatement statement;
         try {
-            query = "delete from " + tableName + "where name = ?";
+            query = "delete from " + tableName + " where name = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, productName);
             statement.execute();
@@ -113,7 +117,7 @@ public class ProductDaoImpl implements ProductDao {
             query = "select * from " + tableName;
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
-            /* (name, price, weight, color, product count, size, material */
+
             while(resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");

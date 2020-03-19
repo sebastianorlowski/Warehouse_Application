@@ -22,6 +22,17 @@ public class Product {
         this.material = material;
     }
 
+    public Product(String name, Float price, Float weight, Color color,
+                   Integer productCount, String size, String material) {
+        this.name = name;
+        this.price = price;
+        this.weight = weight;
+        this.color = color;
+        this.productCount = productCount;
+        this.size = size;
+        this.material = material;
+    }
+
     public Long getId() {
         return id;
     }

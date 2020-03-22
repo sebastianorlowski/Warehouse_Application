@@ -45,6 +45,7 @@ public class UserValidator {
             if (isUserAlreadyExist(user.getLogin())) {
                 throw new UserLoginIsExistException("Login is exist!");
             }
+
         return true;
     }
 

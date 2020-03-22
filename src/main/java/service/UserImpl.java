@@ -140,8 +140,10 @@ public class UserImpl implements UserService {
 
     public boolean isCorrectLoginAndPassword(String login, String password) {
         if (userDao.isCorrectLoginAndPassword(login,password)) {
+            System.out.println("You logged in!");
             return true;
         }
+        System.out.println("Wrong login or Password!");
         return false;
     }
 }

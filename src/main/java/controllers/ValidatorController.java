@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import service.UserImpl;
 
-public class validatorcontroller {
+public class ValidatorController {
     private static UserService userService = UserImpl.getInstance();
 
     public void buttonValidator() {

@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class registercontroller {
+public class RegisterControler {
 
     public void buttonRegister(ActionEvent event) throws Exception {
         Parent validatorPageParent = FXMLLoader.load(getClass().getResource("/validatorpage.fxml"));

@@ -4,6 +4,7 @@ import api.UserDao;
 import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
+import exceptions.user.UserLoginIsExistException;
 import validators.UserValidator;
 
 import java.util.List;

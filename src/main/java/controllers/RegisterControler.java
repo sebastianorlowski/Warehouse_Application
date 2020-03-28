@@ -2,6 +2,10 @@ package controllers;
 
 import api.UserFacade;
 import entity.User;
+import exceptions.user.UserLoginEnoughLengthException;
+import exceptions.user.UserLoginIsExistException;
+import exceptions.user.UserPasswordEnoughLengthException;
+import exceptions.user.UserPasswordIsOneCharUpCaseException;
 import facade.UserFacadeImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,12 +16,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import javax.swing.*;
+import validators.UserValidator;
 
 public class RegisterControler {
     String login, password, email;
     private static UserFacade userFacade = UserFacadeImpl.getInstance();
+    private static UserValidator userValidator = UserValidator.getInstance();
 
     @FXML
     TextField fieldLogin;
@@ -28,29 +32,25 @@ public class RegisterControler {
     @FXML
     Label labelValidator;
 
-    public boolean isRegister() {
+    public void isRegister() {
         login = fieldLogin.getText();
         password = fieldPassword.getText();
         email = fieldEmail.getText();
 
         User user = new User(login, password, email);
-
-
-        if(userFacade.registerUser(user)) {
-            return true;
+        try {
+            if (userValidator.isValidateAddUser(user)) {
+                userFacade.registerUser(user);
+                labelValidator.setText("Registration successfully!");
+            }
         }
-        else {
-            return false;
+        catch (Exception e) {
+            labelValidator.setText(e.getMessage());
         }
     }
 
     public void buttonRegister(ActionEvent event) throws Exception {
-        Parent validatorPageParent = FXMLLoader.load(getClass().getResource("/validatorpage.fxml"));
-        Scene validatorPageScene = new Scene(validatorPageParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(validatorPageScene);
-        window.show();
+        isRegister();
     }
 
     public void buttonBack(ActionEvent event) throws Exception {

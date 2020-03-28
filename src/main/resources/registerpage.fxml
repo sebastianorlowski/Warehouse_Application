@@ -12,7 +12,7 @@
       <TextField fx:id="fieldPassword" layoutX="37.0" layoutY="88.0" promptText="Password" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0" />
       <Button layoutX="78.0" layoutY="161.0" mnemonicParsing="false" onAction="#buttonRegister" prefHeight="30.0" text="Register" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="155.0" />
       <TextField fx:id="fieldEmail" layoutX="49.0" layoutY="107.0" promptText="Email" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
-      <Label fx:id="labelValidator" layoutX="10.0" layoutY="125.0" textAlignment="CENTER" textFill="RED" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="130.0">
+      <Label fx:id="labelValidator" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="125.0" textAlignment="CENTER" textFill="#171717" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="130.0">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>

@@ -32,10 +32,10 @@ public class UserValidator {
     public boolean isValidateAddUser(User user) throws UserLoginIsExistException, UserLoginEnoughLengthException, UserPasswordEnoughLengthException,
             UserPasswordIsOneCharUpCaseException {
         if(isLoginEnoughLength(user.getLogin())) {
-            throw new UserLoginEnoughLengthException("Login must be minimum 5 and maximum 20 letters!");
+            throw new UserLoginEnoughLengthException("Login must have min 5 and max 20 letters!");
         }
             if(isPasswordEnoughLength(user.getPassword())) {
-                throw new UserPasswordEnoughLengthException("Password must be minimum 8 and maximum 20 letters!");
+                throw new UserPasswordEnoughLengthException("Password must have min 8 and max 20 letters!");
             }
 
             if(isPasswordOneCharUpperCase(user.getPassword())) {
@@ -53,7 +53,7 @@ public class UserValidator {
             UserPasswordIsOneCharUpCaseException{
 
         if(isPasswordEnoughLength(newPassword)) {
-            throw new UserPasswordEnoughLengthException("Password must be minimum 8 and maximum 20 letters!");
+            throw new UserPasswordEnoughLengthException("Password must be min 8 and max 20 letters!");
         }
 
         if(isPasswordOneCharUpperCase(newPassword)) {

@@ -12,6 +12,6 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="107.0" layoutY="120.0" mnemonicParsing="false" text="OK" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="130.0" />
+      <Button layoutX="107.0" layoutY="120.0" mnemonicParsing="false" onAction="#goToPanel" text="OK" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="130.0" />
    </children>
 </AnchorPane>

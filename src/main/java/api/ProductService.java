@@ -2,6 +2,7 @@ package api;
 
 import entity.Product;
 import enums.Color;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface ProductService {
     void updateProduct(Product product);
     Product findProductByName(String productName);
     Product findProductById(Long id);
-    List<Product> getAllProducts();
+    ObservableList<Product> getAllProducts();
 }

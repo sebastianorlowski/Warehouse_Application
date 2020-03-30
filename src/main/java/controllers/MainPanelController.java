@@ -18,7 +18,9 @@ public class MainPanelController {
         Scene productPanelScene = new Scene(productPanelPage);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
         window.setScene(productPanelScene);
+        window.centerOnScreen();
         window.setResizable(false);
         window.show();
     }

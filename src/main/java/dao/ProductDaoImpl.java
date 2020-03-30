@@ -3,6 +3,8 @@ package dao;
 import api.ProductDao;
 import entity.Product;
 import enums.Color;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import service.ProductImpl;
 
 import java.sql.*;
@@ -110,8 +112,8 @@ public class ProductDaoImpl implements ProductDao {
         }
     }
 
-    public List<Product> getAllProducts( ){
-        List<Product> products = new LinkedList<Product>();
+    public ObservableList<Product> getAllProducts(){
+        ObservableList<Product> products = FXCollections.observableArrayList();
         PreparedStatement statement;
         try  {
             query = "select * from " + tableName;

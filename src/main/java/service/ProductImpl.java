@@ -5,6 +5,7 @@ import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
 import enums.Color;
+import javafx.collections.ObservableList;
 import validators.ProductValidator;
 
 import java.util.List;
@@ -91,7 +92,7 @@ public class ProductImpl implements ProductService {
         return null;
     }
 
-    public List<Product> getAllProducts() {
+    public ObservableList<Product> getAllProducts() {
         return productDao.getAllProducts();
     }
 }

@@ -156,16 +156,16 @@
       </VBox>
    </left>
    <center>
-      <TableView maxWidth="580.0" mouseTransparent="true" pickOnBounds="false" prefHeight="522.0" prefWidth="580.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" maxWidth="580.0" mouseTransparent="true" pickOnBounds="false" prefHeight="522.0" prefWidth="580.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn editable="false" minWidth="0.0" prefWidth="40.0" resizable="false" text="ID" />
-          <TableColumn editable="false" maxWidth="200.0" minWidth="0.0" prefWidth="168.0" text="Name" />
-            <TableColumn editable="false" maxWidth="50.0" prefWidth="50.0" resizable="false" text="Price" />
-            <TableColumn editable="false" maxWidth="50.0" prefWidth="50.0" resizable="false" text="Weight" />
-            <TableColumn editable="false" maxWidth="80.0" text="Color" />
-            <TableColumn editable="false" maxWidth="50.0" prefWidth="50.0" text="Count" />
-            <TableColumn editable="false" maxWidth="50.0" prefWidth="50.0" resizable="false" text="Size" />
-            <TableColumn editable="false" maxWidth="90.0" prefWidth="100.0" resizable="false" text="Material" />
+          <TableColumn fx:id="columnID" editable="false" maxWidth="100.0" minWidth="0.0" prefWidth="40.0" resizable="false" text="ID" />
+          <TableColumn fx:id="columnName" editable="false" maxWidth="200.0" minWidth="0.0" prefWidth="168.0" text="Name" />
+            <TableColumn fx:id="columnPrice" editable="false" maxWidth="50.0" prefWidth="50.0" resizable="false" text="Price" />
+            <TableColumn fx:id="columnWeight" editable="false" maxWidth="50.0" prefWidth="50.0" resizable="false" text="Weight" />
+            <TableColumn fx:id="columnColor" editable="false" maxWidth="80.0" text="Color" />
+            <TableColumn fx:id="columnCount" editable="false" maxWidth="50.0" prefWidth="50.0" text="Count" />
+            <TableColumn fx:id="columnSize" editable="false" maxWidth="50.0" prefWidth="50.0" resizable="false" text="Size" />
+            <TableColumn fx:id="columnMaterial" editable="false" maxWidth="90.0" prefWidth="100.0" resizable="false" text="Material" />
         </columns>
       </TableView>
    </center>
@@ -196,12 +196,13 @@
                </GridPane.margin>
             </TextField>
             <Button mnemonicParsing="false" onAction="#buttonGetAllProducts" text="Get All" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" onAction="#buttonClearList" text="Clear List" GridPane.columnIndex="4" />
+            <Button mnemonicParsing="false" onAction="#buttonClearList" prefWidth="80.0" text="Clear List" GridPane.columnIndex="4" />
             <Button mnemonicParsing="false" onAction="#buttonBackToMenu" text="&lt;- BACK" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Button>
+            <Button mnemonicParsing="false" prefWidth="80.0" text="Update List" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
          <padding>
             <Insets bottom="5.0" top="5.0" />

@@ -30,7 +30,6 @@ public class LoggedController {
         window.centerOnScreen();
         window.show();
 
-
     }
 
 }

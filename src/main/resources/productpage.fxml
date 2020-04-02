@@ -155,7 +155,7 @@
       </VBox>
    </left>
    <center>
-      <TableView fx:id="tableView" maxWidth="560.0" mouseTransparent="true" pickOnBounds="false" prefWidth="560.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" maxWidth="562.0" onMousePressed="#mouseGetIdByMouseClick" pickOnBounds="false" prefWidth="562.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="columnID" editable="false" maxWidth="40.0" minWidth="0.0" prefWidth="40.0" resizable="false" text="ID" />
           <TableColumn fx:id="columnName" editable="false" maxWidth="200.0" minWidth="0.0" prefWidth="160.0" resizable="false" text="Name" />
@@ -199,6 +199,7 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Button>
+            <Label fx:id="labelID" prefHeight="17.0" prefWidth="337.0" text="ID: " GridPane.columnIndex="3" GridPane.rowIndex="1" />
          </children>
          <padding>
             <Insets bottom="5.0" top="5.0" />

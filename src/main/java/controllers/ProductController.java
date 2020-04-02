@@ -13,7 +13,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import service.ProductImpl;
 
 import java.util.ArrayList;
@@ -138,12 +141,15 @@ public class ProductController {
 
         tableView.setItems(getProduct);
     }
-
-    public void buttonClearList() {
-        tableView.getItems().clear();
-    }
-
-    public void buttonRefreshList() {
+    @FXML
+    Label labelID;
+    public void mouseGetIdByMouseClick() {
+        TablePosition pos = tableView.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        Product product = tableView.getItems().get(row);
+        TableColumn col = columnID;
+        String data = String.valueOf(col.getCellObservableValue(product).getValue());
+        labelID.setText(data);
 
     }
 }

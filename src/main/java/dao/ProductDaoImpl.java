@@ -94,8 +94,10 @@ public class ProductDaoImpl implements ProductDao {
     public void updateProduct(Product product) {
         PreparedStatement statement;
         try {
-            query = "update from "+ tableName + " set name, price, weight, color, productCount, size, material = ?,?,?,?,?,?,? where id = ?";
+            query = "update " + tableName + " set name = ?, price = ?, weight = ?, color = ?, productcount = ?, size = ?," +
+                    " material = ? where id = ?";
             statement = connection.prepareStatement(query);
+
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getPrice());
             statement.setFloat(3, product.getWeight());
@@ -103,6 +105,7 @@ public class ProductDaoImpl implements ProductDao {
             statement.setInt(5, product.getProductCount());
             statement.setString(6, product.getSize());
             statement.setString(7, product.getMaterial());
+            statement.setLong(8, product.getId());
             statement.executeUpdate();
 
             statement.close();

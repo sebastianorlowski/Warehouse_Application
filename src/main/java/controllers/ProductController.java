@@ -49,7 +49,7 @@ public class ProductController {
         buttonGetAllProducts();
         }
 
-    public void buttonAddProduct(ActionEvent event) {
+    public void buttonAddProduct() {
         String name = fieldName.getText();
         Float price = Float.valueOf(fieldPrice.getText());
         Float weight = Float.valueOf(fieldWeight.getText());
@@ -64,16 +64,25 @@ public class ProductController {
         buttonGetAllProducts();
     }
 
-    public void comboBoxValue() {
-        Color color = comboBoxColor.getValue();
-    }
-
-
     public void buttonUpdateProduct() {
+        Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+        Long id = selectedItem.getId();
+        String name = fieldName.getText();
+        Float price = Float.valueOf(fieldPrice.getText());
+        Float weight = Float.valueOf(fieldWeight.getText());
+        Color color =  comboBoxColor.getValue();
+        Integer productCount = Integer.valueOf(fieldCount.getText());
+        String size = fieldSize.getText();
+        String material = fieldMaterial.getText();
 
+        Product product = new Product(id, name , price, weight, color, productCount, size, material);
+
+        productService.updateProduct(product);
+        buttonGetAllProducts();
     }
 
     public void buttonClearFields() {
+        labelID.setText("ID: -");
         fieldName.clear();
         fieldPrice.clear();
         fieldWeight.clear();
@@ -143,13 +152,30 @@ public class ProductController {
     }
     @FXML
     Label labelID;
-    public void mouseGetIdByMouseClick() {
-        TablePosition pos = tableView.getSelectionModel().getSelectedCells().get(0);
-        int row = pos.getRow();
-        Product product = tableView.getItems().get(row);
-        TableColumn col = columnID;
-        String data = String.valueOf(col.getCellObservableValue(product).getValue());
-        labelID.setText(data);
+    public void mouseGetDataByPress() {
+        Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+        Long id = selectedItem.getId();
+        labelID.setText("ID: " + id);
 
+        String name = selectedItem.getName();
+        fieldName.setText(name);
+
+        Float price = selectedItem.getPrice();
+        fieldPrice.setText(String.valueOf(price));
+
+        Float weight = selectedItem.getWeight();
+        fieldWeight.setText(String.valueOf(weight));
+
+        Color color = selectedItem.getColor();
+        comboBoxColor.setValue(color);
+
+        Integer count = selectedItem.getProductCount();
+        fieldCount.setText(String.valueOf(count));
+
+        String size = selectedItem.getSize();
+        fieldSize.setText(size);
+
+        String material = selectedItem.getMaterial();
+        fieldMaterial.setText(material);
     }
 }

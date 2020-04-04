@@ -57,17 +57,14 @@ public class ProductImpl implements ProductService {
     }
 
 
-    public void updateProduct(Product product) {
+    public Product updateProduct(Product product) {
         try {
-        if(findProductById(product.getId()) != null) {
-            if (productValidator.isValidateUpdateProduct(product)) {
                 productDao.updateProduct(product);
-            }
-        }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
                     }
+        return null;
     }
 
     public Product findProductByName(String productName) {

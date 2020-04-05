@@ -11,7 +11,7 @@ public interface ProductService {
     Product removeProductById(Long id);
     Product removeProductByName(String productName);
     Product updateProduct(Product product);
-    Product findProductByName(String productName);
+    ObservableList<Product> findProductByName(String productName);
     Product findProductById(Long id);
     ObservableList<Product> getAllProducts();
 }

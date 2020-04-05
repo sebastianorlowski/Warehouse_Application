@@ -79,6 +79,7 @@ public class ProductController {
 
         productService.updateProduct(product);
         buttonGetAllProducts();
+        buttonClearFields();
     }
 
     public void buttonClearFields() {
@@ -93,7 +94,12 @@ public class ProductController {
     }
 
     public void buttonRemoveProduct() {
+        Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+        Long id = selectedItem.getId();
 
+        productService.removeProductById(id);
+        buttonGetAllProducts();
+        buttonClearFields();
     }
 
     public void buttonBackToMenu(ActionEvent event) throws Exception {
@@ -107,12 +113,48 @@ public class ProductController {
         window.show();
     }
 
+    @FXML
+    TextField fieldFindName;
+
     public void buttonFindName() {
+        String findName = fieldFindName.getText();
+
+        ObservableList<Product> products;
+        products = productService.findProductByName(findName);
+
+
+        columnID.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
+        columnName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<Product, Float>("price"));
+        columnWeight.setCellValueFactory(new PropertyValueFactory<Product, Float>("weight"));
+        columnColor.setCellValueFactory(new PropertyValueFactory<Product, Color>("color"));
+        columnCount.setCellValueFactory(new PropertyValueFactory<Product, Integer>("productCount"));
+        columnSize.setCellValueFactory(new PropertyValueFactory<Product, String>("size"));
+        columnMaterial.setCellValueFactory(new PropertyValueFactory<Product, String>("material"));
+
+        tableView.setItems(products);
 
     }
 
-    public void buttonFindID() {
+    @FXML
+    TextField fieldFindID;
 
+    public void buttonFindID() {
+        Long id = Long.valueOf(fieldFindID.getText());
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        Product product = productService.findProductById(id);
+        products.add(product);
+
+        columnID.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
+        columnName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<Product, Float>("price"));
+        columnWeight.setCellValueFactory(new PropertyValueFactory<Product, Float>("weight"));
+        columnColor.setCellValueFactory(new PropertyValueFactory<Product, Color>("color"));
+        columnCount.setCellValueFactory(new PropertyValueFactory<Product, Integer>("productCount"));
+        columnSize.setCellValueFactory(new PropertyValueFactory<Product, String>("size"));
+        columnMaterial.setCellValueFactory(new PropertyValueFactory<Product, String>("material"));
+
+        tableView.setItems(products);
     }
 
     @FXML

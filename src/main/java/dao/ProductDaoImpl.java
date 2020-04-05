@@ -115,6 +115,36 @@ public class ProductDaoImpl implements ProductDao {
         }
     }
 
+    public ObservableList<Product> findProductByName(String productName) {
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        PreparedStatement statement;
+
+        try {
+            query = "select * from " + tableName + " where name = " + "'" + productName + "';";
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                Float price = resultSet.getFloat("price");
+                Float weight = resultSet.getFloat("weight");
+                Color color = Color.valueOf(resultSet.getString(("color")));
+                Integer productCount = resultSet.getInt("productcount");
+                String size = resultSet.getString("size");
+                String material = resultSet.getString("material");
+
+                Product product = new Product(id, name, price, weight, color, productCount, size, material);
+                products.add(product);
+            }
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
     public ObservableList<Product> getAllProducts(){
         ObservableList<Product> products = FXCollections.observableArrayList();
         PreparedStatement statement;

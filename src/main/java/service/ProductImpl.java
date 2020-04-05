@@ -67,15 +67,8 @@ public class ProductImpl implements ProductService {
         return null;
     }
 
-    public Product findProductByName(String productName) {
-        List<Product> products = null;
-        products = productDao.getAllProducts();
-        for(Product product : products) {
-            if(productName.equals(product.getName())) {
-                return product;
-            }
-        }
-        return null;
+    public ObservableList<Product> findProductByName(String productName) {
+        return productDao.findProductByName(productName);
     }
 
     public Product findProductById(Long id) {

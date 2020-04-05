@@ -10,6 +10,7 @@ public interface ProductDao {
     void removeProductById(Long id);
     void removeProductByName(String productName);
     void updateProduct(Product product);
+    ObservableList<Product> findProductByName(String productName);
     ObservableList<Product> getAllProducts();
 
 }

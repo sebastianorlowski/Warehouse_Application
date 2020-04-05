@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 
 public class LoginController {
     String login, password;
-    public boolean showLogged;
-
 
     private static UserFacade userFacade = UserFacadeImpl.getInstance();
 

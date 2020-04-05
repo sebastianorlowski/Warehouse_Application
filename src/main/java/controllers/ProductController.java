@@ -49,37 +49,54 @@ public class ProductController {
         buttonGetAllProducts();
         }
 
+        @FXML
+        Label labelInfo;
+
     public void buttonAddProduct() {
-        String name = fieldName.getText();
-        Float price = Float.valueOf(fieldPrice.getText());
-        Float weight = Float.valueOf(fieldWeight.getText());
-        Color color =  comboBoxColor.getValue();
-        Integer productCount = Integer.valueOf(fieldCount.getText());
-        String size = fieldSize.getText();
-        String material = fieldMaterial.getText();
+        try {
+            String name = fieldName.getText();
+            Float price = Float.valueOf(fieldPrice.getText());
+            Float weight = Float.valueOf(fieldWeight.getText());
+            Color color = comboBoxColor.getValue();
+            Integer productCount = Integer.valueOf(fieldCount.getText());
+            String size = fieldSize.getText();
+            String material = fieldMaterial.getText();
 
-        Product product = new Product(1L,name , price, weight, color, productCount, size, material);
+            Product product = new Product(1L, name, price, weight, color, productCount, size, material);
+            productService.addProduct(product);
+            buttonGetAllProducts();
+            labelInfo.setText("You add product!");
 
-        productService.addProduct(product);
-        buttonGetAllProducts();
+        }
+
+        catch (NumberFormatException e) {
+            labelInfo.setText("SOMETHING WENT WRONG!");
+        }
     }
 
     public void buttonUpdateProduct() {
-        Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-        Long id = selectedItem.getId();
-        String name = fieldName.getText();
-        Float price = Float.valueOf(fieldPrice.getText());
-        Float weight = Float.valueOf(fieldWeight.getText());
-        Color color =  comboBoxColor.getValue();
-        Integer productCount = Integer.valueOf(fieldCount.getText());
-        String size = fieldSize.getText();
-        String material = fieldMaterial.getText();
+        try {
+            Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+            Long id = selectedItem.getId();
+            String name = fieldName.getText();
+            Float price = Float.valueOf(fieldPrice.getText());
+            Float weight = Float.valueOf(fieldWeight.getText());
+            Color color = comboBoxColor.getValue();
+            Integer productCount = Integer.valueOf(fieldCount.getText());
+            String size = fieldSize.getText();
+            String material = fieldMaterial.getText();
 
-        Product product = new Product(id, name , price, weight, color, productCount, size, material);
+            Product product = new Product(id, name, price, weight, color, productCount, size, material);
 
-        productService.updateProduct(product);
-        buttonGetAllProducts();
-        buttonClearFields();
+            productService.updateProduct(product);
+            buttonGetAllProducts();
+            buttonClearFields();
+            labelInfo.setText("You update product!");
+        }
+
+        catch (NumberFormatException e) {
+            labelInfo.setText("SOMETHING WENT WRONG!");
+        }
     }
 
     public void buttonClearFields() {

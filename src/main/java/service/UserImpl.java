@@ -76,13 +76,14 @@ public class UserImpl implements UserService {
     }
 
     public User updateUserPassword(String login, String password, String newPassword) {
-        List<User> users = null;
+        List<User> users;
         users = userDao.getAllUsers();
         try {
             for (User user : users) {
                 if (login.equals(user.getLogin()) && password.equals(user.getPassword())) {
-                    if (userValidator.isValidateUpdateUserPassword(newPassword))
+                    if (userValidator.isValidateUpdateUserPassword(password, newPassword)) {
                         userDao.updateUserPassword(login, password, newPassword);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -92,12 +93,19 @@ public class UserImpl implements UserService {
     }
 
     public User updateUserEmail(String login, String email, String newEmail) {
-        List<User> users = null;
+        List<User> users;
         users = userDao.getAllUsers();
+        try {
         for (User user : users) {
             if (login.equals(user.getLogin()) && email.equals(user.getPassword())) {
-                userDao.updateUserPassword(login, email, newEmail);
+                if(userValidator.isEmailAlreadyExist(newEmail)) {
+                    userDao.updateUserEmail(login, email, newEmail);
+                }
             }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }

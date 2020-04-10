@@ -22,6 +22,7 @@ public class LoginController {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(registerPageScene);
+        window.setResizable(false);
         window.show();
 
     }
@@ -31,16 +32,12 @@ public class LoginController {
     TextField passwordField;
 
     public boolean isCorrectLoginAndPassword() {
-        login = loginField.getText();
-        password = passwordField.getText();
+        this.login = loginField.getText();
+        this.password = passwordField.getText();
 
-        if(userFacade.loginUser(login, password)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return userFacade.loginUser(login, password);
     }
+
 
     public void buttonSignIn(ActionEvent event) throws Exception {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -50,6 +47,8 @@ public class LoginController {
             Scene loggedInPageScene = new Scene(loggedInPageParent);
             window.setTitle("");
             window.setScene(loggedInPageScene);
+            window.centerOnScreen();
+            window.setResizable(false);
             window.show();
         }
         else {
@@ -57,6 +56,8 @@ public class LoginController {
             Scene isNotLoggedInPageScene = new Scene(isNotLoggedInPageParent);
             window.setTitle("");
             window.setScene(isNotLoggedInPageScene);
+            window.centerOnScreen();
+            window.setResizable(false);
             window.show();
         }
     }

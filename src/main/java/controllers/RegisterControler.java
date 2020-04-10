@@ -60,6 +60,8 @@ public class RegisterControler {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(mainScene);
+        window.setResizable(false);
+        window.centerOnScreen();
         window.show();
     }
 }

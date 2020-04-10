@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import service.ProductImpl;
+import validators.ProductValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
 public class ProductController {
 
     private static ProductService productService = ProductImpl.getInstance();
+    private static ProductValidator productValidator = ProductValidator.getInstance();
 
     @FXML
     TextField fieldName;
@@ -63,16 +65,22 @@ public class ProductController {
             String material = fieldMaterial.getText();
 
             Product product = new Product(1L, name, price, weight, color, productCount, size, material);
-            productService.addProduct(product);
-            buttonGetAllProducts();
-            labelInfo.setText("You add product!");
-
+            try {
+                if (productValidator.isValidateProduct(product)) {
+                    productService.addProduct(product);
+                    buttonGetAllProducts();
+                    labelInfo.setText("You add product!");
+                }
+            }
+            catch (Exception e) {
+                labelInfo.setText(e.getMessage());
+            }
         }
 
         catch (NumberFormatException e) {
             labelInfo.setText("SOMETHING WENT WRONG!");
         }
-    }
+            }
 
     public void buttonUpdateProduct() {
         try {
@@ -87,17 +95,21 @@ public class ProductController {
             String material = fieldMaterial.getText();
 
             Product product = new Product(id, name, price, weight, color, productCount, size, material);
-
-            productService.updateProduct(product);
-            buttonGetAllProducts();
-            buttonClearFields();
-            labelInfo.setText("You update product!");
+            try {
+                if (productValidator.isValidateUpdateProduct(product)) {
+                    productService.updateProduct(product);
+                    buttonGetAllProducts();
+                    buttonClearFields();
+                    labelInfo.setText("You update product!");
+                }
+            } catch (Exception e) {
+                labelInfo.setText(e.getMessage());
+            }
         }
-
         catch (NumberFormatException e) {
-            labelInfo.setText("SOMETHING WENT WRONG!");
+                labelInfo.setText("SOMETHING WENT WRONG!");
+            }
         }
-    }
 
     public void buttonClearFields() {
         labelID.setText("ID: -");

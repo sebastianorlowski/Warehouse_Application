@@ -1,14 +1,9 @@
 package validators;
 
 import api.UserDao;
-import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
 import exceptions.user.*;
-import service.UserImpl;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class UserValidator {
@@ -29,7 +24,8 @@ public class UserValidator {
     private final int PASSWORD_MIN_LENGTH = 8;
     private final int PASSWORD_MAX_LENGTH = 20;
 
-    public boolean isValidateAddUser(User user) throws UserLoginIsExistException, UserLoginEnoughLengthException, UserPasswordEnoughLengthException,
+    public boolean isValidateAddUser(User user) throws UserEmailAlreadyExist, UserLoginIsExistException, UserLoginEnoughLengthException,
+            UserPasswordEnoughLengthException,
             UserPasswordIsOneCharUpCaseException {
         if(isLoginEnoughLength(user.getLogin())) {
             throw new UserLoginEnoughLengthException("Login must have min 5 and max 20 letters!");
@@ -43,14 +39,17 @@ public class UserValidator {
             }
 
             if (isUserAlreadyExist(user.getLogin())) {
-                throw new UserLoginIsExistException("Login is exist!");
+                throw new UserLoginIsExistException("Login is already exist!");
             }
 
+            if(isEmailAlreadyExist(user.getEmail())) {
+                throw new UserEmailAlreadyExist("Email is already exist!");
+            }
         return true;
     }
 
-    public boolean isValidateUpdateUserPassword(String newPassword) throws UserPasswordEnoughLengthException,
-            UserPasswordIsOneCharUpCaseException{
+    public boolean isValidateUpdateUserPassword(String password, String newPassword) throws UserPasswordEnoughLengthException,
+            UserPasswordIsOneCharUpCaseException, UserPasswordThisSame{
 
         if(isPasswordEnoughLength(newPassword)) {
             throw new UserPasswordEnoughLengthException("Password must be min 8 and max 20 letters!");
@@ -59,7 +58,7 @@ public class UserValidator {
         if(isPasswordOneCharUpperCase(newPassword)) {
             throw new UserPasswordIsOneCharUpCaseException("Password must have one uppercase letter!");
         }
-        return true;
+       return true;
     }
 
     private boolean isLoginEnoughLength(String login) {
@@ -79,8 +78,19 @@ public class UserValidator {
         return true;
     }
 
+    public boolean isEmailAlreadyExist(String email) {
+        List<User> users;
+        users = userDao.getAllUsers();
+        for(User user : users) {
+            if(user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isUserAlreadyExist(String login) {
-        List<User> users = null;
+        List<User> users;
         users = userDao.getAllUsers();
         for(User user : users) {
             if(user.getLogin().equals(login)) {

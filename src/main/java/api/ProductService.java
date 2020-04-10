@@ -9,7 +9,6 @@ import java.util.List;
 public interface ProductService {
     boolean addProduct(Product product);
     Product removeProductById(Long id);
-    Product removeProductByName(String productName);
     Product updateProduct(Product product);
     ObservableList<Product> findProductByName(String productName);
     Product findProductById(Long id);

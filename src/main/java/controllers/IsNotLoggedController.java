@@ -23,8 +23,9 @@ public class IsNotLoggedController {
         Scene mainScene = new Scene(main);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
+        window.centerOnScreen();
         window.setScene(mainScene);
+        window.setResizable(false);
         window.show();
     }
 }

@@ -16,9 +16,10 @@ public class LoggedController {
     @FXML
     Label isLogged;
 
-    public void initialize() {
+    public void initialize() throws Exception {
         isLogged.setText("You logged in!");
     }
+
 
     public void goToPanel(ActionEvent event) throws Exception {
         Parent mainPanelPage = FXMLLoader.load(getClass().getResource("/mainpanelpage.fxml"));
@@ -26,10 +27,10 @@ public class LoggedController {
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        window.setScene(mainPanelScene);
         window.centerOnScreen();
+        window.setScene(mainPanelScene);
+        window.setResizable(false);
         window.show();
-
     }
 
 }

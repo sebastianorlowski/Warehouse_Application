@@ -5,11 +5,7 @@ import entity.Product;
 import enums.Color;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import service.ProductImpl;
-
 import java.sql.*;
-import java.util.LinkedList;
-import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
 
@@ -72,21 +68,6 @@ public class ProductDaoImpl implements ProductDao {
             statement.close();
         }
         catch(SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void removeProductByName(String productName) {
-        PreparedStatement statement;
-        try {
-            query = "delete from " + tableName + " where name = ?";
-            statement = connection.prepareStatement(query);
-            statement.setString(1, productName);
-            statement.execute();
-
-            statement.close();
-        }
-        catch (SQLException e) {
             e.printStackTrace();
         }
     }

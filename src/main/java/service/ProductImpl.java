@@ -43,23 +43,11 @@ public class ProductImpl implements ProductService {
         return null;
     }
 
-
-    public Product removeProductByName(String productName) {
-        try {
-            if(productValidator.productIsAlreadyExist(productName)) {
-                productDao.removeProductByName(productName);
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
-
     public Product updateProduct(Product product) {
         try {
+            if (productValidator.isValidateUpdateProduct(product)) {
                 productDao.updateProduct(product);
+            }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

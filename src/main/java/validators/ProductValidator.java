@@ -28,7 +28,7 @@ public class ProductValidator {
     private final int PRODUCT_COUNT = 0;
 
     public boolean isValidateProduct(Product product) throws ProductCountMinimumException, ProductNameCannotBeEmptyException,
-            ProductNameEnoughLengthException, ProductPriceMinimumException, ProductWeightMinimumException, ProductIsAlreadyExist {
+            ProductNameEnoughLengthException, ProductPriceMinimumException, ProductWeightMinimumException {
         if(productCount(product.getProductCount())) {
             throw new ProductCountMinimumException("Product count cannot be 0 or less!");
         }
@@ -43,9 +43,6 @@ public class ProductValidator {
         }
         if(productWeightMinimum(product.getWeight())) {
             throw new ProductWeightMinimumException("Product weight cannot be 0 or less!");
-        }
-        if(productIsAlreadyExist(product.getName())) {
-            throw new ProductIsAlreadyExist("Product is already exist!");
         }
         return true;
     }
@@ -87,19 +84,8 @@ public class ProductValidator {
         return weight <= MIN_WEIGHT;
     }
 
-    public boolean productIsAlreadyExist(String productName){
-        List<Product> products = null;
-        products = productDao.getAllProducts();
-        for(Product product : products) {
-            if(productName.equals(product)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean productIsAlreadyExistId(Long id){
-        List<Product> products = null;
+    public boolean productIsAlreadyExistId(Long id) {
+        List<Product> products;
         products = productDao.getAllProducts();
         for(Product product : products) {
             if(id.equals(product.getId())) {
@@ -108,5 +94,4 @@ public class ProductValidator {
         }
         return false;
     }
-
 }

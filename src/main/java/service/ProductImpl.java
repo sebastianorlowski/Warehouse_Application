@@ -31,7 +31,7 @@ public class ProductImpl implements ProductService {
         return false;
         }
 
-    public Product removeProductById(Long id) {
+    public void removeProductById(Long id) {
         try {
             if(productValidator.productIsAlreadyExistId(id)) {
                 productDao.removeProductById(id);
@@ -40,10 +40,9 @@ public class ProductImpl implements ProductService {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
     }
 
-    public Product updateProduct(Product product) {
+    public void updateProduct(Product product) {
         try {
             if (productValidator.isValidateUpdateProduct(product)) {
                 productDao.updateProduct(product);
@@ -52,7 +51,6 @@ public class ProductImpl implements ProductService {
         catch (Exception e) {
             System.out.println(e.getMessage());
                     }
-        return null;
     }
 
     public ObservableList<Product> findProductByName(String productName) {

@@ -15,7 +15,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="100.0" text="Admin">
+            <Button mnemonicParsing="false" onAction="#buttonAdmin" prefWidth="100.0" text="Admin">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

@@ -52,21 +52,6 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    public void removeUserById(Long id) {
-        PreparedStatement statement;
-        try {
-            String query = "delete from " + tableName + " where id = ?";
-            statement = connection.prepareStatement(query);
-            statement.setLong(1, id);
-
-            statement.execute();
-            statement.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void removeUserByLogin(String login) {
         PreparedStatement statement;
 
@@ -145,32 +130,8 @@ public class UserDaoImpl implements UserDao {
         return users;
      }
 
-     public void findUserById(Long id) {
-        PreparedStatement statement;
-
-        try {
-            String query = "select * from " + tableName + " where id = " + id;
-            statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while(resultSet.next()) {
-                id = resultSet.getLong("id");
-                String login = resultSet.getString("login");
-                String password = resultSet.getString("password");
-                String email = resultSet.getString("email");
-
-                User user = new User(id, login, password, email);
-                users.add(user);
-                System.out.println(user);
-            }
-            statement.close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-      }
-
-    public void findUserByLogin(String login) {
+    public List<User> findUserByLogin(String login) {
+        List<User> users = new LinkedList<User>();
         PreparedStatement statement;
         try {
             String query = "select * from " + tableName + " where login = '" + login + "';";
@@ -184,13 +145,14 @@ public class UserDaoImpl implements UserDao {
                 String email = resultSet.getString("email");
 
                 User user = new User(id, login, password, email);
-                System.out.println(user);
+                users.add(user);
             }
             statement.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
+        return users;
     }
 
     public boolean isCorrectLoginAndPassword(String login, String password) {

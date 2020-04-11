@@ -34,29 +34,8 @@ public class UserImpl implements UserService {
         return false;
     }
 
-    public User removeUserById(Long id) {
-        List<User> users = null;
-        users = userDao.getAllUsers();
-        try {
-            if (findUserById(id) != null) {
-                for (User user : users) {
-                    if (id.equals(user.getId())) {
-                        System.out.println("You removed user " + user.getLogin());
-                        userDao.removeUserById(id);
-                    }
-                }
-            } else {
-                System.out.println("This user is not exist!");
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
     public User removeUserByLogin(String login) {
-        List<User> users = null;
+        List<User> users;
         users = userDao.getAllUsers();
         try {
             if (findUserByLogin(login) != null) {
@@ -110,22 +89,11 @@ public class UserImpl implements UserService {
         return null;
     }
 
-    public User findUserById(Long id) {
-        List<User> users = null;
-        users = userDao.getAllUsers();
-        for (User user : users) {
-            if (id == user.getId()) {
-                return user;
-            }
-        }
-        return null;
-    }
-
     public User findUserByLogin(String login) {
-        List<User> users = null;
+        List<User> users;
         users = userDao.getAllUsers();
         for (User user : users) {
-            if (login.equals(user.getId())) {
+            if (login.equals(user.getLogin())) {
                 return user;
             }
         }
@@ -133,7 +101,7 @@ public class UserImpl implements UserService {
     }
 
     public User findUserByEmail(String email) {
-        List<User> users = null;
+        List<User> users;
         users = userDao.getAllUsers();
         for(User user : users) {
             if(email.equals(user.getEmail())) {
@@ -148,9 +116,6 @@ public class UserImpl implements UserService {
     }
 
     public boolean isCorrectLoginAndPassword(String login, String password) {
-        if (userDao.isCorrectLoginAndPassword(login,password)) {
-            return true;
-        }
-        return false;
+        return (userDao.isCorrectLoginAndPassword(login, password));
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface ProductService {
     boolean addProduct(Product product);
-    Product removeProductById(Long id);
-    Product updateProduct(Product product);
+    void removeProductById(Long id);
+    void updateProduct(Product product);
     ObservableList<Product> findProductByName(String productName);
     Product findProductById(Long id);
     ObservableList<Product> getAllProducts();

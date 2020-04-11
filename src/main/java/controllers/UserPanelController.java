@@ -33,7 +33,7 @@ public class UserPanelController {
     }
 
     public void buttonAdmin(ActionEvent event) throws Exception {
-        Parent adminParentPage = FXMLLoader.load(getClass().getResource("/adminaccesspage.fxml"));
+        Parent adminParentPage = FXMLLoader.load(getClass().getResource("/adminlogin.fxml"));
         Scene adminScenePage = new Scene(adminParentPage);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

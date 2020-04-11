@@ -12,9 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminAccessController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminAccessController">
    <children>
       <VBox alignment="CENTER" layoutX="70.0" layoutY="-33.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #c7c7c7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -33,7 +31,7 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="fieldLogin" promptText="Login" />
+                                          <TextField fx:id="fieldLoginPassword" promptText="Login" />
                                           <PasswordField fx:id="fieldOldPassword" prefWidth="150.0" promptText="Old Password" />
                                           <PasswordField fx:id="fieldNewPassword" prefWidth="150.0" promptText="New Password" />
                                           <Button mnemonicParsing="false" onAction="#buttonChangePassword" text="CHANGE">
@@ -41,7 +39,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Button>
-                                          <Label fx:id="labelPasswordInfo" />
+                                          <Label fx:id="labelPasswordInfo" prefWidth="300.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -59,15 +57,15 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="fieldLogin" promptText="Login" />
-                                          <PasswordField fx:id="fieldOldEmail" prefWidth="150.0" promptText="Old Email" />
-                                          <PasswordField fx:id="fieldNewEmail" prefWidth="150.0" promptText="New Email" />
-                                          <Button mnemonicParsing="false" onAction="#buttonChangePassword" text="CHANGE">
+                                          <TextField fx:id="fieldLoginEmail" promptText="Login" />
+                                          <TextField fx:id="fieldOldEmail" promptText="Email" />
+                                          <TextField fx:id="fieldNewEmail" promptText="New Email" />
+                                          <Button mnemonicParsing="false" onAction="#buttonChangeEmail" text="CHANGE">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Button>
-                                          <Label fx:id="labelPasswordInfo1" />
+                                          <Label fx:id="labelEmailInfo" alignment="CENTER" prefWidth="300.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -85,13 +83,13 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="fieldLogin1" promptText="Login" />
-                                          <Button mnemonicParsing="false" onAction="#buttonChangePassword" text="GET USER">
+                                          <TextField fx:id="fieldFindLogin" promptText="Login" />
+                                          <Button mnemonicParsing="false" onAction="#buttonFindUser" text="GET USER">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Button>
-                                          <Label fx:id="labelPasswordInfo2" />
+                                          <Label fx:id="labelFindLogin" prefHeight="80.0" prefWidth="300.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -109,8 +107,8 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="fieldLogin11" promptText="Login" />
-                                          <Button mnemonicParsing="false" onAction="#buttonChangePassword" text="REMOVE">
+                                          <TextField fx:id="fieldRemoveUser" promptText="Login" />
+                                          <Button mnemonicParsing="false" onAction="#buttonRemoveUser" text="REMOVE">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -133,7 +131,7 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <Button mnemonicParsing="false" onAction="#buttonChangePassword" text="GENERATE">
+                                          <Button mnemonicParsing="false" onAction="#buttonGetAllUsers" text="GENERATE">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>

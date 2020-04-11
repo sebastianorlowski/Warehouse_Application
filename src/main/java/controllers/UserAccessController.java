@@ -33,7 +33,7 @@ public class UserAccessController {
        String newPassword = fieldNewPassword.getText();
        try {
            if (userDao.isCorrectLoginAndPassword(login, password)) {
-                   if (userValidator.isValidateUpdateUserPassword(password, newPassword)) {
+                   if (userValidator.isValidateUpdateUserPassword(newPassword)) {
                        userDao.updateUserPassword(login, password, newPassword);
                        labelPasswordInfo.setText("You changed password!");
                        clearTextFields();

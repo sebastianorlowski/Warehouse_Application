@@ -54,32 +54,24 @@ public class UserImpl implements UserService {
         return null;
     }
 
-    public User updateUserPassword(String login, String password, String newPassword) {
-        List<User> users;
-        users = userDao.getAllUsers();
+    public boolean updateUserPassword(String login, String password, String newPassword) {
         try {
-            for (User user : users) {
-                if (login.equals(user.getLogin()) && password.equals(user.getPassword())) {
-                    if (userValidator.isValidateUpdateUserPassword(password, newPassword)) {
-                        userDao.updateUserPassword(login, password, newPassword);
-                    }
+            if (isCorrectLoginAndPassword(login, password)) {
+                if (userValidator.isValidateUpdateUserPassword(newPassword)) {
+                    userDao.updateUserPassword(login, password, newPassword);
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return false;
     }
 
     public User updateUserEmail(String login, String email, String newEmail) {
-        List<User> users;
-        users = userDao.getAllUsers();
         try {
-        for (User user : users) {
-            if (login.equals(user.getLogin()) && email.equals(user.getPassword())) {
+            if (isCorrectLoginAndEmail(login, email)) {
                 if(userValidator.isEmailAlreadyExist(newEmail)) {
                     userDao.updateUserEmail(login, email, newEmail);
-                }
             }
             }
         }
@@ -116,6 +108,10 @@ public class UserImpl implements UserService {
     }
 
     public boolean isCorrectLoginAndPassword(String login, String password) {
-        return (userDao.isCorrectLoginAndPassword(login, password));
+        return userDao.isCorrectLoginAndPassword(login, password);
+    }
+
+    public boolean isCorrectLoginAndEmail(String login, String email) {
+        return userDao.isCorrectLoginAndEmail(login, email);
     }
 }

@@ -95,7 +95,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, newEmail);
             statement.setString(2, login);
             statement.setString(3, email);
-            statement.executeUpdate(query);
+            statement.executeUpdate();
 
             statement.close();
         }
@@ -169,6 +169,25 @@ public class UserDaoImpl implements UserDao {
             }
         }
         catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isCorrectLoginAndEmail(String login, String email) {
+        PreparedStatement statement;
+        try {
+            if(login != null && email != null) {
+                String query = "select * from " + tableName + " where login = '" + login + "' and email = '" + email +"';";
+                statement = connection.prepareStatement(query);
+                ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()) {
+                return true;
+            }
+            statement.close();
+            }
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return false;

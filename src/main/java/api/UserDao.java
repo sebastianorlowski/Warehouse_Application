@@ -16,6 +16,7 @@ public interface UserDao {
     void updateUserEmail(String login, String email, String newEmail);
     List<User> findUserByLogin(String login);
     boolean isCorrectLoginAndPassword(String login, String password);
+    boolean isCorrectLoginAndEmail(String login, String email);
     List<User> getAllUsers();
 
 }

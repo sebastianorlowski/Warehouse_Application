@@ -34,7 +34,7 @@ public class UserImpl implements UserService {
         return false;
     }
 
-    public User removeUserByLogin(String login) {
+    public boolean removeUserByLogin(String login) {
         List<User> users;
         users = userDao.getAllUsers();
         try {
@@ -51,7 +51,7 @@ public class UserImpl implements UserService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return false;
     }
 
     public boolean updateUserPassword(String login, String password, String newPassword) {
@@ -67,7 +67,7 @@ public class UserImpl implements UserService {
         return false;
     }
 
-    public User updateUserEmail(String login, String email, String newEmail) {
+    public boolean updateUserEmail(String login, String email, String newEmail) {
         try {
             if (isCorrectLoginAndEmail(login, email)) {
                 if(userValidator.isEmailAlreadyExist(newEmail)) {
@@ -78,30 +78,17 @@ public class UserImpl implements UserService {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return false;
     }
 
-    public User findUserByLogin(String login) {
-        List<User> users;
-        users = userDao.getAllUsers();
-        for (User user : users) {
-            if (login.equals(user.getLogin())) {
-                return user;
-            }
-        }
-        return null;
+    public List<User> findUserByLogin(String login) {
+        return userDao.findUserByLogin(login);
     }
 
-    public User findUserByEmail(String email) {
-        List<User> users;
-        users = userDao.getAllUsers();
-        for(User user : users) {
-            if(email.equals(user.getEmail())) {
-                return user;
-            }
-        }
-        return null;
+    public List<User> findUserByEmail(String email) {
+        return userDao.findUserByEmail(email);
     }
+
 
     public List<User> getAllUsers() {
         return userDao.getAllUsers();

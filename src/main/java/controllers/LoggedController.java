@@ -16,7 +16,7 @@ public class LoggedController {
     @FXML
     Label isLogged;
 
-    public void initialize() throws Exception {
+    public void initialize() {
         isLogged.setText("You logged in!");
     }
 

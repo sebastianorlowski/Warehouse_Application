@@ -155,6 +155,31 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
+    public List<User> findUserByEmail(String email) {
+        List<User> users = new LinkedList<User>();
+        PreparedStatement statement;
+        try {
+            String query = "select * from " + tableName + " where email = '" + email + "';";
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
+                email = resultSet.getString("email");
+
+                User user = new User(id, login, password, email);
+                users.add(user);
+            }
+            statement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     public boolean isCorrectLoginAndPassword(String login, String password) {
         PreparedStatement statement;
         try {

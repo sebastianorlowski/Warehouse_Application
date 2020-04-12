@@ -37,7 +37,7 @@ public class AdminLoginController {
             Parent adminPanelPage = FXMLLoader.load(getClass().getResource("/adminaccesspage.fxml"));
             Scene adminPanelScene = new Scene(adminPanelPage);
 
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Stage window = new Stage();
             window.setResizable(false);
             window.setScene(adminPanelScene);
             window.centerOnScreen();

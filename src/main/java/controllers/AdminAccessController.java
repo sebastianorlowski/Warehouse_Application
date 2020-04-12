@@ -1,18 +1,22 @@
 package controllers;
 
 import api.UserDao;
-import api.UserFacade;
+import api.UserService;
 import dao.UserDaoImpl;
-import facade.UserFacadeImpl;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import service.UserImpl;
 import validators.UserValidator;
 
 public class AdminAccessController {
-    private static UserDao userDao = UserDaoImpl.getInstance();
+    private static UserService userService = UserImpl.getInstance();
     private static UserValidator userValidator = UserValidator.getInstance();
-    private static UserFacade userFacade = UserFacadeImpl.getInstance();
 
     @FXML
     TextField fieldLoginPassword;
@@ -29,9 +33,9 @@ public class AdminAccessController {
         String newPassword = fieldNewPassword.getText();
 
         try {
-            if (userDao.isCorrectLoginAndPassword(login, password)) {
+            if (userService.isCorrectLoginAndPassword(login, password)) {
                 if (userValidator.isValidateUpdateUserPassword(newPassword)) {
-                    userDao.updateUserPassword(login, password, newPassword);
+                    userService.updateUserPassword(login, password, newPassword);
                     labelPasswordInfo.setText("You changed password!");
                     fieldLoginPassword.clear();
                     fieldOldPassword.clear();
@@ -44,6 +48,7 @@ public class AdminAccessController {
             labelPasswordInfo.setText(e.getMessage());
         }
     }
+
 
     @FXML
     TextField fieldLoginEmail;
@@ -58,9 +63,9 @@ public class AdminAccessController {
         String login = fieldLoginEmail.getText();
         String email = fieldOldEmail.getText();
         String newEmail = fieldNewEmail.getText();
-        if(userDao.isCorrectLoginAndEmail(login,email)) {
+        if(userService.isCorrectLoginAndEmail(login,email)) {
             if (userValidator.isEmailAlreadyExist(email)) {
-                userDao.updateUserEmail(login, email, newEmail);
+                userService.updateUserEmail(login, email, newEmail);
                 labelEmailInfo.setText("You changed email!");
                 fieldLoginEmail.clear();
                 fieldOldEmail.clear();
@@ -69,19 +74,33 @@ public class AdminAccessController {
         }
     }
 
-    @FXML
-    TextField fieldFindLogin;
-    @FXML
-    Label labelFindLogin;
+    public void buttonFindUserByLogin() throws Exception{
 
-    public void buttonFindUser() {
-        String login = fieldFindLogin.getText();
-
-        labelFindLogin.setText(String.valueOf(userDao.findUserByLogin(login)));
+        Parent getFindPage = FXMLLoader.load(getClass().getResource("/getuserbyloginpage.fxml"));
+        Scene findScene = new Scene(getFindPage);
+        Stage findStage = new Stage();
+        findStage.initModality(Modality.APPLICATION_MODAL);
+        findStage.setScene(findScene);
+        findStage.show();
     }
 
-    public void buttonRemoveUser() {
+    public void buttonFindUserByEmail() throws Exception{
 
+        Parent getFindPage = FXMLLoader.load(getClass().getResource("/getuserbyemailpage.fxml"));
+        Scene findScene = new Scene(getFindPage);
+        Stage findStage = new Stage();
+        findStage.initModality(Modality.APPLICATION_MODAL);
+        findStage.setScene(findScene);
+        findStage.show();
+    }
+
+
+
+    @FXML
+    TextField fieldRemoveUser;
+    public void buttonRemoveUser() {
+        String login = fieldRemoveUser.getText();
+        userService.removeUserByLogin(login);
     }
 
     public void buttonGetAllUsers() {

@@ -37,7 +37,7 @@ public class RegisterControler {
         password = fieldPassword.getText();
         email = fieldEmail.getText();
 
-        User user = new User(login, password, email);
+        User user = new User(login, password, email, 1);
         try {
             if (userValidator.isValidateAddUser(user)) {
                 userFacade.registerUser(user);

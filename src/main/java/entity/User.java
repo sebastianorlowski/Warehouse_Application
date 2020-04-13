@@ -13,18 +13,19 @@ public class User {
     private String email;
     private Integer userRoleId;
 
-    public User(Long id, String login, String password, String email) {
+    public User(Long id, String login, String password, String email, Integer userRoleId) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-
+        this.userRoleId = userRoleId;
     }
 
-    public User(String login, String password, String email) {
+    public User(String login, String password, String email, Integer userRoleId) {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.userRoleId = userRoleId;
     }
 
     public Long getId() {
@@ -43,12 +44,16 @@ public class User {
         return email;
     }
 
+    public Integer getUserRoleId() {
+        return userRoleId;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id  +
                 "\nLogin: " + login +
                 "\nPassword: " + password +
-                "\nEmail: " + email ;
-
+                "\nEmail: " + email +
+                "\nRole: " + userRoleId;
     }
 }

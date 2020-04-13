@@ -40,12 +40,13 @@ public class UserDaoImpl implements UserDao {
     public void addUser(User user) {
         PreparedStatement statement;
         try {
-            String query = "insert into " + tableName + " (login, password, email) values (?, ?, ?)";
+            String query = "insert into " + tableName + " (login, password, email, user_role_id) values (?, ?, ?, ?)";
             statement = connection.prepareStatement(query);
 
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
+            statement.setInt(4, user.getUserRoleId());
 
             statement.execute();
             statement.close();
@@ -121,8 +122,9 @@ public class UserDaoImpl implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
+                Integer userRoleId = resultSet.getInt("user_role_id");
 
-                User user = new User(id, login, password, email);
+                User user = new User(id, login, password, email, userRoleId);
                 users.add(user);
             }
         statement.close();
@@ -146,8 +148,9 @@ public class UserDaoImpl implements UserDao {
                 login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
+                Integer userRoleId = resultSet.getInt("user_role_id");
 
-                User user = new User(id, login, password, email);
+                User user = new User(id, login, password, email, userRoleId);
                 users.add(user);
             }
             statement.close();
@@ -171,8 +174,9 @@ public class UserDaoImpl implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 email = resultSet.getString("email");
+                Integer userRoleId = resultSet.getInt("user_role_id");
 
-                User user = new User(id, login, password, email);
+                User user = new User(id, login, password, email, userRoleId);
                 users.add(user);
             }
             statement.close();

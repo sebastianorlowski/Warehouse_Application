@@ -11,12 +11,14 @@ public class User {
     private String login;
     private String password;
     private String email;
+    private Integer userRoleId;
 
-    public User(Long id, String login, String password, String email) {
+    public User(Long id, String login, String password, String email, Integer userRoleId) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
+        this.userRoleId = userRoleId;
     }
 
     public User(String login, String password, String email) {
@@ -44,9 +46,9 @@ public class User {
     @Override
     public String toString() {
         return "ID: " + id  +
-                "\nLogin: '" + login + '\'' +
-                "\nPassword: '" + password +
-                "\nEmail: '" + email ;
+                "\nLogin: " + login +
+                "\nPassword: " + password +
+                "\nEmail: " + email ;
 
     }
 }

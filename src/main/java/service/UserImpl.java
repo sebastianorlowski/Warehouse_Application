@@ -5,6 +5,7 @@ import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
 import exceptions.user.UserLoginIsExistException;
+import javafx.collections.ObservableList;
 import validators.UserValidator;
 
 import java.util.List;
@@ -90,7 +91,7 @@ public class UserImpl implements UserService {
     }
 
 
-    public List<User> getAllUsers() {
+    public ObservableList<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 

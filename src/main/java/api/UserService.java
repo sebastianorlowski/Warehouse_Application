@@ -7,6 +7,7 @@ czy hasło i login się zgadzają,
 * */
 
 import entity.User;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface UserService {
     boolean updateUserEmail(String login, String email, String newEmail);
     List<User> findUserByLogin(String login);
     List<User> findUserByEmail(String email);
-    List<User> getAllUsers();
+    ObservableList<User> getAllUsers();
     boolean isCorrectLoginAndPassword(String login, String password);
     boolean isCorrectLoginAndEmail(String login, String email);
 

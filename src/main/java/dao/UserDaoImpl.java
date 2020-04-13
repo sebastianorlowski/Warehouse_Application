@@ -2,6 +2,9 @@ package dao;
 
 import api.UserDao;
 import entity.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -104,8 +107,8 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    public List<User> getAllUsers() {
-        List<User> users = new LinkedList<User>();
+    public ObservableList<User> getAllUsers() {
+        ObservableList<User> users = FXCollections.observableArrayList();
         PreparedStatement statement;
 
         try {

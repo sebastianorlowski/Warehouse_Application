@@ -3,8 +3,10 @@ package controllers;
 import api.UserDao;
 import api.UserService;
 import dao.UserDaoImpl;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -92,9 +94,9 @@ public class AdminAccessController {
         findStage.initModality(Modality.APPLICATION_MODAL);
         findStage.setScene(findScene);
         findStage.show();
+
+
     }
-
-
 
     @FXML
     TextField fieldRemoveUser;
@@ -103,14 +105,31 @@ public class AdminAccessController {
         userService.removeUserByLogin(login);
     }
 
-    public void buttonGetAllUsers() {
+    public void buttonGetAllUsers() throws Exception {
+        Parent getAllUserPage = FXMLLoader.load(getClass().getResource("/getalluserspage.fxml"));
+        Scene getAllUserScene = new Scene(getAllUserPage);
 
+        Stage window = new Stage();
+
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setScene(getAllUserScene);
+        window.centerOnScreen();
+        window.setResizable(false);
+        window.show();
     }
 
 
 
-    public void buttonBack() {
+    public void buttonBack(ActionEvent event) throws Exception {
+        Parent mainPanelPage = FXMLLoader.load(getClass().getResource("/mainpanelpage.fxml"));
+        Scene mainPanelScene = new Scene(mainPanelPage);
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.centerOnScreen();
+        window.setScene(mainPanelScene);
+        window.setResizable(false);
+        window.show();
     }
 
 }

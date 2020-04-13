@@ -1,6 +1,7 @@
 package api;
 
 import entity.User;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,6 @@ public interface UserDao {
     List<User> findUserByEmail(String email);
     boolean isCorrectLoginAndPassword(String login, String password);
     boolean isCorrectLoginAndEmail(String login, String email);
-    List<User> getAllUsers();
+    ObservableList<User> getAllUsers();
 
 }

@@ -33,11 +33,10 @@ public class AdminLoginController {
     public void buttonSignIn(ActionEvent event) throws Exception {
 
         if(isCorrectLoginAndPassword()) {
-            Thread.sleep(1000);
             Parent adminPanelPage = FXMLLoader.load(getClass().getResource("/adminaccesspage.fxml"));
             Scene adminPanelScene = new Scene(adminPanelPage);
 
-            Stage window = new Stage();
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setResizable(false);
             window.setScene(adminPanelScene);
             window.centerOnScreen();

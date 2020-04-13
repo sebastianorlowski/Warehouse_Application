@@ -1,6 +1,7 @@
 package controllers;
 
 import api.UserDao;
+import api.UserService;
 import dao.UserDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,11 +12,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import service.UserImpl;
 import validators.UserValidator;
 
 public class UserAccessController {
 
-    private static UserDao userDao = UserDaoImpl.getInstance();
+    private static UserService userService = UserImpl.getInstance();
     private static UserValidator userValidator = UserValidator.getInstance();
 
     @FXML
@@ -32,9 +34,9 @@ public class UserAccessController {
        String password = fieldOldPassword.getText();
        String newPassword = fieldNewPassword.getText();
        try {
-           if (userDao.isCorrectLoginAndPassword(login, password)) {
+           if (userService.isCorrectLoginAndPassword(login, password)) {
                    if (userValidator.isValidateUpdateUserPassword(newPassword)) {
-                       userDao.updateUserPassword(login, password, newPassword);
+                       userService.updateUserPassword(login, password, newPassword);
                        labelPasswordInfo.setText("You changed password!");
                        clearTextFields();
                    }

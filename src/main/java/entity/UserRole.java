@@ -12,6 +12,10 @@ public class UserRole {
         this.role = role;
     }
 
+    public UserRole(Role role) {
+        this.role = role;
+    }
+
     public Integer getId() {
         return id;
     }

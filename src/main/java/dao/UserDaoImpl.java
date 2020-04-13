@@ -1,7 +1,9 @@
 package dao;
 
 import api.UserDao;
+import api.UserRoleDao;
 import entity.User;
+import entity.UserRole;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,6 +14,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private final static UserDao instance = new UserDaoImpl();
+    private static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
 
     private Connection connection;
     private final String databaseName = "warehouse";
@@ -40,13 +43,14 @@ public class UserDaoImpl implements UserDao {
     public void addUser(User user) {
         PreparedStatement statement;
         try {
+            Integer roleId = userRoleDao.getRoleIdByName(user.getUserRole().getRole().name());
             String query = "insert into " + tableName + " (login, password, email, user_role_id) values (?, ?, ?, ?)";
             statement = connection.prepareStatement(query);
 
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
-            statement.setInt(4, user.getUserRoleId());
+            statement.setInt(4, roleId);
 
             statement.execute();
             statement.close();
@@ -122,9 +126,10 @@ public class UserDaoImpl implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
-                Integer userRoleId = resultSet.getInt("user_role_id");
+                Integer roleId = resultSet.getInt("user_role_id");
+                UserRole userRole = userRoleDao.getRoleById(roleId);
 
-                User user = new User(id, login, password, email, userRoleId);
+                User user = new User(id, login, password, email, userRole);
                 users.add(user);
             }
         statement.close();
@@ -148,9 +153,10 @@ public class UserDaoImpl implements UserDao {
                 login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
-                Integer userRoleId = resultSet.getInt("user_role_id");
+                Integer roleId = resultSet.getInt("user_role_id");
+                UserRole userRole = userRoleDao.getRoleById(roleId);
 
-                User user = new User(id, login, password, email, userRoleId);
+                User user = new User(id, login, password, email, userRole);
                 users.add(user);
             }
             statement.close();
@@ -174,9 +180,10 @@ public class UserDaoImpl implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 email = resultSet.getString("email");
-                Integer userRoleId = resultSet.getInt("user_role_id");
+                Integer roleId = resultSet.getInt("user_role_id");
+                UserRole userRole = userRoleDao.getRoleById(roleId);
 
-                User user = new User(id, login, password, email, userRoleId);
+                User user = new User(id, login, password, email, userRole);
                 users.add(user);
             }
             statement.close();
@@ -185,6 +192,27 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
         return users;
+    }
+
+    public Integer getUserRole(String login) {
+        PreparedStatement statement;
+
+        try {
+            String query = "select user_role_id from " + tableName + " where login = '" + login + "'";
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()) {
+                Integer roleId = resultSet.getInt("user_role_id");
+
+                return roleId;
+            }
+            statement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean isCorrectLoginAndPassword(String login, String password) {

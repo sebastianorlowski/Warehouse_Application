@@ -2,6 +2,8 @@ package controllers;
 
 import api.UserFacade;
 import entity.User;
+import entity.UserRole;
+import enums.Role;
 import exceptions.user.UserLoginEnoughLengthException;
 import exceptions.user.UserLoginIsExistException;
 import exceptions.user.UserPasswordEnoughLengthException;
@@ -20,6 +22,7 @@ import validators.UserValidator;
 
 public class RegisterControler {
     String login, password, email;
+    final String role = "USER";
     private static UserFacade userFacade = UserFacadeImpl.getInstance();
     private static UserValidator userValidator = UserValidator.getInstance();
 
@@ -37,7 +40,8 @@ public class RegisterControler {
         password = fieldPassword.getText();
         email = fieldEmail.getText();
 
-        User user = new User(login, password, email, 1);
+
+        User user = new User(login, password, email, new UserRole(Role.valueOf(role)));
         try {
             if (userValidator.isValidateAddUser(user)) {
                 userFacade.registerUser(user);
@@ -49,7 +53,7 @@ public class RegisterControler {
         }
     }
 
-    public void buttonRegister(ActionEvent event) throws Exception {
+    public void buttonRegister() {
         isRegister();
     }
 

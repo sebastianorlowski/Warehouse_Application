@@ -13,6 +13,12 @@ public class UserRoleDaoImpl implements UserRoleDao {
     private final String user = "root";
     private final String password = "respeck";
 
+    private final static UserRoleDao instance = new UserRoleDaoImpl();
+
+    public static UserRoleDao getInstance() {
+        return UserRoleDaoImpl.instance;
+    }
+
     public UserRoleDaoImpl() {
         init();
     }
@@ -31,7 +37,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
         PreparedStatement statement;
 
         try {
-            String query = "select * from " + tableName + " where name = '" + roleName + "'";
+            String query = "select * from " + tableName + " where role = '" + roleName + "'";
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
@@ -50,7 +56,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
         PreparedStatement statement;
 
         try {
-            String query = "select * from " + tableName + " where id = " + id;
+            String query = "select * from " + tableName + " where id = '" + id + "'";
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 

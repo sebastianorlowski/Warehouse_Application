@@ -1,5 +1,8 @@
 package entity;
 
+import api.UserRoleDao;
+import dao.UserRoleDaoImpl;
+import enums.Role;
 import validators.UserValidator;
 
 import java.util.LinkedList;
@@ -7,25 +10,33 @@ import java.util.List;
 
 public class User {
 
+    private static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
+
     private Long id;
     private String login;
     private String password;
     private String email;
-    private Integer userRoleId;
+    private UserRole userRole;
 
-    public User(Long id, String login, String password, String email, Integer userRoleId) {
+    public User(Long id, String login, String password, String email, UserRole userRole) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.userRoleId = userRoleId;
+        this.userRole = userRole;
     }
 
-    public User(String login, String password, String email, Integer userRoleId) {
+    public User(String login, String password, String email, UserRole userRole) {
         this.login = login;
         this.password = password;
         this.email = email;
-        this.userRoleId = userRoleId;
+        this.userRole = userRole;
+    }
+
+    public User(String login, String password, String email) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
     }
 
     public Long getId() {
@@ -44,8 +55,8 @@ public class User {
         return email;
     }
 
-    public Integer getUserRoleId() {
-        return userRoleId;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
     @Override
@@ -54,6 +65,6 @@ public class User {
                 "\nLogin: " + login +
                 "\nPassword: " + password +
                 "\nEmail: " + email +
-                "\nRole: " + userRoleId;
+                "\nRole: " + userRole;
     }
 }

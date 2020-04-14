@@ -4,10 +4,6 @@ import api.UserFacade;
 import entity.User;
 import entity.UserRole;
 import enums.Role;
-import exceptions.user.UserLoginEnoughLengthException;
-import exceptions.user.UserLoginIsExistException;
-import exceptions.user.UserPasswordEnoughLengthException;
-import exceptions.user.UserPasswordIsOneCharUpCaseException;
 import facade.UserFacadeImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import validators.UserValidator;
 
-public class RegisterControler {
+public class RegisterController {
     String login, password, email;
     final String role = "USER";
     private static UserFacade userFacade = UserFacadeImpl.getInstance();
@@ -39,7 +35,6 @@ public class RegisterControler {
         login = fieldLogin.getText();
         password = fieldPassword.getText();
         email = fieldEmail.getText();
-
 
         User user = new User(login, password, email, new UserRole(Role.valueOf(role)));
         try {

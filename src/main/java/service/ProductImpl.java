@@ -4,7 +4,6 @@ import api.ProductDao;
 import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
-import enums.Color;
 import javafx.collections.ObservableList;
 import validators.ProductValidator;
 
@@ -21,7 +20,7 @@ public class ProductImpl implements ProductService {
 
     public void addProduct(Product product) {
         try {
-                productDao.addProduct(product);
+            productDao.addProduct(product);
         }
         catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -30,9 +29,7 @@ public class ProductImpl implements ProductService {
 
     public void removeProductById(Long id) {
         try {
-            if(productValidator.productIsAlreadyExistId(id)) {
-                productDao.removeProductById(id);
-            }
+            productDao.removeProductById(id);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -41,9 +38,7 @@ public class ProductImpl implements ProductService {
 
     public void updateProduct(Product product) {
         try {
-            if (productValidator.isValidateUpdateProduct(product)) {
-                productDao.updateProduct(product);
-            }
+            productDao.updateProduct(product);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

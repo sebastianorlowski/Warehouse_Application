@@ -1,8 +1,6 @@
 package controllers;
 
-import api.UserDao;
 import api.UserService;
-import dao.UserDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,5 +65,4 @@ public class UserAccessController {
         window.centerOnScreen();
         window.show();
     }
-
 }

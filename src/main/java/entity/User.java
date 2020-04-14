@@ -1,16 +1,6 @@
 package entity;
 
-import api.UserRoleDao;
-import dao.UserRoleDaoImpl;
-import enums.Role;
-import validators.UserValidator;
-
-import java.util.LinkedList;
-import java.util.List;
-
 public class User {
-
-    private static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
 
     private Long id;
     private String login;

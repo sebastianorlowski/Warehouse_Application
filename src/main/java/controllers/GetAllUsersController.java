@@ -17,7 +17,6 @@ public class GetAllUsersController {
 
     public void buttonGenerateUsers() {
         getUsers = userService.getAllUsers();
-
         listUsers.setItems(getUsers);
     }
 }

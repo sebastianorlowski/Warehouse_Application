@@ -1,8 +1,6 @@
 package controllers;
 
-import api.UserDao;
 import api.UserService;
-import dao.UserDaoImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,8 +12,9 @@ public class FindUserByEmailController {
     TextField fieldGetUserByEmail;
     @FXML
     Label labelEmailInfo;
+
     public void buttonGetUserByEmail() {
         String email = fieldGetUserByEmail.getText();
-    labelEmailInfo.setText(String.valueOf(userService.findUserByEmail(email)));
+        labelEmailInfo.setText(String.valueOf(userService.findUserByEmail(email)));
     }
 }

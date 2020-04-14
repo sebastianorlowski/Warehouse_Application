@@ -46,7 +46,6 @@ public class UserDaoImpl implements UserDao {
             Integer roleId = userRoleDao.getRoleIdByName(user.getUserRole().getRole().name());
             String query = "insert into " + tableName + " (login, password, email, user_role_id) values (?, ?, ?, ?)";
             statement = connection.prepareStatement(query);
-
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
@@ -67,7 +66,6 @@ public class UserDaoImpl implements UserDao {
             String query = "delete from " + tableName + " where login = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, login);
-
             statement.execute();
             statement.close();
         }

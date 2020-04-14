@@ -2,9 +2,7 @@ package controllers;
 
 import api.UserDao;
 import api.UserFacade;
-import api.UserRoleDao;
 import dao.UserDaoImpl;
-import dao.UserRoleDaoImpl;
 import facade.UserFacadeImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 
 public class AdminLoginController {
     private static UserFacade userFacade = UserFacadeImpl.getInstance();
@@ -39,7 +36,6 @@ public class AdminLoginController {
     }
 
     public void buttonSignIn(ActionEvent event) throws Exception {
-
         if (isCorrectLoginAndPassword()) {
             if (role == 2) {
                 Parent adminPanelPage = FXMLLoader.load(getClass().getResource("/adminaccesspage.fxml"));

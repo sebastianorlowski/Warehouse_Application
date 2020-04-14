@@ -34,9 +34,7 @@ public class UserImpl implements UserService {
 
     public void removeUserByLogin(String login) {
         try {
-            if(userValidator.isUserAlreadyExist(login)) {
-                userDao.removeUserByLogin(login);
-            }
+            userDao.removeUserByLogin(login);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -44,11 +42,7 @@ public class UserImpl implements UserService {
 
     public void updateUserPassword(String login, String password, String newPassword) {
         try {
-            if (isCorrectLoginAndPassword(login, password)) {
-                if (userValidator.isValidateUpdateUserPassword(newPassword)) {
-                    userDao.updateUserPassword(login, password, newPassword);
-                }
-            }
+            userDao.updateUserPassword(login, password, newPassword);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -56,9 +50,7 @@ public class UserImpl implements UserService {
 
     public void updateUserEmail(String login, String email, String newEmail) {
         try {
-            if (isCorrectLoginAndEmail(login, email)) {
-                    userDao.updateUserEmail(login, email, newEmail);
-            }
+            userDao.updateUserEmail(login, email, newEmail);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -75,10 +67,6 @@ public class UserImpl implements UserService {
 
     public List<User> findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
-    }
-
-    public Integer getUserRole(String login) {
-        return userDao.getUserRole(login);
     }
 
     public ObservableList<User> getAllUsers() {

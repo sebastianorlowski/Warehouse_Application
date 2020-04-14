@@ -1,7 +1,5 @@
 package controllers;
 
-import api.UserFacade;
-import facade.UserFacadeImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +18,6 @@ public class LoggedController {
         isLogged.setText("You logged in!");
     }
 
-
     public void goToPanel(ActionEvent event) throws Exception {
         Parent mainPanelPage = FXMLLoader.load(getClass().getResource("/mainpanelpage.fxml"));
         Scene mainPanelScene = new Scene(mainPanelPage);
@@ -32,5 +29,4 @@ public class LoggedController {
         window.setResizable(false);
         window.show();
     }
-
 }

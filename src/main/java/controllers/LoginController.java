@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 public class LoginController {
     String login, password;
-
     private static UserFacade userFacade = UserFacadeImpl.getInstance();
 
     public void buttonGoToRegister(ActionEvent event) throws Exception{
@@ -24,8 +23,8 @@ public class LoginController {
         window.setScene(registerPageScene);
         window.setResizable(false);
         window.show();
-
     }
+
     @FXML
     TextField loginField;
     @FXML
@@ -37,7 +36,6 @@ public class LoginController {
 
         return userFacade.loginUser(login, password);
     }
-
 
     public void buttonSignIn(ActionEvent event) throws Exception {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -61,5 +59,4 @@ public class LoginController {
             window.show();
         }
     }
-
 }

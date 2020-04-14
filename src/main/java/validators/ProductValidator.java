@@ -8,8 +8,6 @@ import exceptions.products.*;
 
 import java.util.List;
 
-/* (Long id, String name, Float price, Float weight, Color color,
-                   Integer productCount, String size, String material)*/
 public class ProductValidator {
     private ProductDao productDao = ProductDaoImpl.getInstance();
 

@@ -14,7 +14,6 @@ public class UserRoleDaoImpl implements UserRoleDao {
     private final String password = "respeck";
 
     private final static UserRoleDao instance = new UserRoleDaoImpl();
-
     public static UserRoleDao getInstance() {
         return UserRoleDaoImpl.instance;
     }

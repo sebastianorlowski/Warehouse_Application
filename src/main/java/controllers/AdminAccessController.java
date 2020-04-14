@@ -1,9 +1,7 @@
 package controllers;
 
-import api.UserDao;
 import api.UserRoleDao;
 import api.UserService;
-import dao.UserDaoImpl;
 import dao.UserRoleDaoImpl;
 import enums.Role;
 import javafx.collections.FXCollections;
@@ -58,7 +56,6 @@ public class AdminAccessController {
         }
     }
 
-
     @FXML
     TextField fieldLoginEmail;
     @FXML
@@ -84,10 +81,12 @@ public class AdminAccessController {
                 fieldNewEmail.clear();
             }
         }
+        else {
+            labelEmailInfo.setText("Wrong login or email");
+        }
     }
 
     public void buttonFindUserByLogin() throws Exception{
-
         Parent getFindPage = FXMLLoader.load(getClass().getResource("/getuserbyloginpage.fxml"));
         Scene findScene = new Scene(getFindPage);
         Stage findStage = new Stage();
@@ -97,23 +96,28 @@ public class AdminAccessController {
     }
 
     public void buttonFindUserByEmail() throws Exception{
-
         Parent getFindPage = FXMLLoader.load(getClass().getResource("/getuserbyemailpage.fxml"));
         Scene findScene = new Scene(getFindPage);
         Stage findStage = new Stage();
         findStage.initModality(Modality.APPLICATION_MODAL);
         findStage.setScene(findScene);
         findStage.show();
-
-
     }
 
     @FXML
     TextField fieldRemoveUser;
+    @FXML
+    Label labelRemoveInfo;
+
     public void buttonRemoveUser() {
         String login = fieldRemoveUser.getText();
+        if(userValidator.isUserAlreadyExist(login)) {
         userService.removeUserByLogin(login);
-
+        labelRemoveInfo.setText("You removed " + login);
+        }
+        else {
+            labelRemoveInfo.setText("This login is not exist!");
+        }
     }
 
     public void buttonGetAllUsers() throws Exception {
@@ -121,7 +125,6 @@ public class AdminAccessController {
         Scene getAllUserScene = new Scene(getAllUserPage);
 
         Stage window = new Stage();
-
         window.initModality(Modality.APPLICATION_MODAL);
         window.setScene(getAllUserScene);
         window.centerOnScreen();
@@ -135,7 +138,6 @@ public class AdminAccessController {
     Label labelGetUserInfoRole;
     @FXML
     ComboBox<Role> comboboxRole;
-
     ObservableList<Role> roles = FXCollections.observableArrayList(Role.values());
 
     public void buttonGetUserRole() {
@@ -163,5 +165,4 @@ public class AdminAccessController {
         window.setResizable(false);
         window.show();
     }
-
 }

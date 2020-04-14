@@ -18,7 +18,6 @@ import service.ProductImpl;
 import validators.ProductValidator;
 
 public class ProductController {
-
     private static ProductService productService = ProductImpl.getInstance();
     private static ProductValidator productValidator = ProductValidator.getInstance();
 
@@ -40,7 +39,6 @@ public class ProductController {
     ObservableList<Color> list = FXCollections.observableArrayList(Color.values());
 
     public void initialize() {
-
         comboBoxColor.setItems(list);
         buttonGetAllProducts();
         }
@@ -70,7 +68,6 @@ public class ProductController {
                 labelInfo.setText(e.getMessage());
             }
         }
-
         catch (NumberFormatException e) {
             labelInfo.setText("SOMETHING WENT WRONG!");
         }
@@ -119,10 +116,11 @@ public class ProductController {
     public void buttonRemoveProduct() {
         Product selectedItem = tableView.getSelectionModel().getSelectedItem();
         Long id = selectedItem.getId();
-
-        productService.removeProductById(id);
-        buttonGetAllProducts();
-        buttonClearFields();
+        if(productValidator.productIsAlreadyExistId(id)) {
+            productService.removeProductById(id);
+            buttonGetAllProducts();
+            buttonClearFields();
+        }
     }
 
     public void buttonBackToMenu(ActionEvent event) throws Exception {
@@ -145,7 +143,6 @@ public class ProductController {
         ObservableList<Product> products;
         products = productService.findProductByName(findName);
 
-
         columnID.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
         columnName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         columnPrice.setCellValueFactory(new PropertyValueFactory<Product, Float>("price"));
@@ -156,7 +153,6 @@ public class ProductController {
         columnMaterial.setCellValueFactory(new PropertyValueFactory<Product, String>("material"));
 
         tableView.setItems(products);
-
     }
 
     @FXML

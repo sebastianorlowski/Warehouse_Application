@@ -8,9 +8,7 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 
 public class ProductDaoImpl implements ProductDao {
-
     private static ProductDao instance = new ProductDaoImpl();
-
     public static ProductDao getInstance() {
         return ProductDaoImpl.instance;
     }
@@ -78,7 +76,6 @@ public class ProductDaoImpl implements ProductDao {
             query = "update " + tableName + " set name = ?, price = ?, weight = ?, color = ?, productcount = ?, size = ?," +
                     " material = ? where id = ?";
             statement = connection.prepareStatement(query);
-
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getPrice());
             statement.setFloat(3, product.getWeight());

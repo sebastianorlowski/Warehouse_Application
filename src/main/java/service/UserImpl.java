@@ -42,12 +42,9 @@ public class UserImpl implements UserService {
             if (findUserByLogin(login) != null) {
                 for (User user : users) {
                     if (login.equals(user.getLogin())) {
-                        System.out.println("You removed user " + user.getLogin());
                         userDao.removeUserByLogin(login);
                     }
                 }
-            } else {
-                System.out.println("This user is not exist!");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -71,15 +68,17 @@ public class UserImpl implements UserService {
     public boolean updateUserEmail(String login, String email, String newEmail) {
         try {
             if (isCorrectLoginAndEmail(login, email)) {
-                if(userValidator.isEmailAlreadyExist(newEmail)) {
                     userDao.updateUserEmail(login, email, newEmail);
-            }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public void updateUserRole(String login, Integer roleId) {
+        userDao.updateUserRole(login, roleId);
     }
 
     public List<User> findUserByLogin(String login) {
@@ -90,6 +89,9 @@ public class UserImpl implements UserService {
         return userDao.findUserByEmail(email);
     }
 
+    public Integer getUserRole(String login) {
+        return userDao.getUserRole(login);
+    }
 
     public ObservableList<User> getAllUsers() {
         return userDao.getAllUsers();

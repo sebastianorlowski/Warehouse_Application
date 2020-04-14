@@ -13,15 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import service.ProductImpl;
 import validators.ProductValidator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProductController {
 

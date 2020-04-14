@@ -112,6 +112,23 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    public void updateUserRole(String login, Integer roleId) {
+        PreparedStatement statement;
+
+        try {
+            String query = "update " + tableName + " set user_role_id = ? where login = ?";
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, roleId);
+            statement.setString(2, login);
+            statement.executeUpdate();
+
+            statement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ObservableList<User> getAllUsers() {
         ObservableList<User> users = FXCollections.observableArrayList();
         PreparedStatement statement;

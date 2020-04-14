@@ -1,14 +1,20 @@
 package controllers;
 
 import api.UserDao;
+import api.UserRoleDao;
 import api.UserService;
 import dao.UserDaoImpl;
+import dao.UserRoleDaoImpl;
+import enums.Role;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
@@ -19,6 +25,7 @@ import validators.UserValidator;
 public class AdminAccessController {
     private static UserService userService = UserImpl.getInstance();
     private static UserValidator userValidator = UserValidator.getInstance();
+    private static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
 
     @FXML
     TextField fieldLoginPassword;
@@ -66,7 +73,10 @@ public class AdminAccessController {
         String email = fieldOldEmail.getText();
         String newEmail = fieldNewEmail.getText();
         if(userService.isCorrectLoginAndEmail(login,email)) {
-            if (userValidator.isEmailAlreadyExist(email)) {
+            if (userValidator.isEmailAlreadyExist(newEmail)) {
+                labelEmailInfo.setText("Email is already exist!");
+            }
+            else {
                 userService.updateUserEmail(login, email, newEmail);
                 labelEmailInfo.setText("You changed email!");
                 fieldLoginEmail.clear();
@@ -103,6 +113,7 @@ public class AdminAccessController {
     public void buttonRemoveUser() {
         String login = fieldRemoveUser.getText();
         userService.removeUserByLogin(login);
+
     }
 
     public void buttonGetAllUsers() throws Exception {
@@ -118,7 +129,28 @@ public class AdminAccessController {
         window.show();
     }
 
+    @FXML
+    TextField fieldLoginRole;
+    @FXML
+    Label labelGetUserInfoRole;
+    @FXML
+    ComboBox<Role> comboboxRole;
 
+    ObservableList<Role> roles = FXCollections.observableArrayList(Role.values());
+
+    public void buttonGetUserRole() {
+        String login = fieldLoginRole.getText();
+        labelGetUserInfoRole.setText(String.valueOf(userService.findUserByLogin(login)));
+        comboboxRole.setItems(roles);
+    }
+
+    public void buttonUpdateRole() {
+        comboboxRole.setItems(roles);
+        String login = fieldLoginRole.getText();
+        Role role = comboboxRole.getValue();
+        Integer updateRoleId = userRoleDao.getRoleIdByName(String.valueOf(role));
+        userService.updateUserRole(login, updateRoleId);
+    }
 
     public void buttonBack(ActionEvent event) throws Exception {
         Parent mainPanelPage = FXMLLoader.load(getClass().getResource("/mainpanelpage.fxml"));

@@ -15,6 +15,7 @@ public interface UserDao {
     void removeUserByLogin(String login);
     void updateUserPassword(String login, String password, String newPassword);
     void updateUserEmail(String login, String email, String newEmail);
+    void updateUserRole(String login, Integer roleId);
     List<User> findUserByLogin(String login);
     List<User> findUserByEmail(String email);
     Integer getUserRole(String login);

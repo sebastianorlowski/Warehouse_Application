@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface UserService {
 
-    boolean addUser(User user);
+    void addUser(User user);
     boolean removeUserByLogin(String login);
     boolean updateUserPassword(String login, String password, String newPassword);
     boolean updateUserEmail(String login, String email, String newEmail);

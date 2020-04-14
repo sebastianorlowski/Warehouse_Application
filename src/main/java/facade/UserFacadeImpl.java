@@ -16,8 +16,8 @@ public class UserFacadeImpl implements UserFacade {
         return instance;
     }
 
-    public boolean registerUser(User user) {
-        return userService.addUser(user);
+    public void registerUser(User user) {
+        userService.addUser(user);
     }
 
     public boolean loginUser(String login, String password) {

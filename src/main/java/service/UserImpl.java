@@ -24,15 +24,12 @@ public class UserImpl implements UserService {
         return instance;
     }
 
-    public boolean addUser(User user) {
+    public void addUser(User user) {
         try {
-            if (userValidator.isValidateAddUser(user)) {
-                userDao.addUser(user);
-            }
+            userDao.addUser(user);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return false;
     }
 
     public boolean removeUserByLogin(String login) {

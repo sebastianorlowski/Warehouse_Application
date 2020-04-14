@@ -19,16 +19,13 @@ public class ProductImpl implements ProductService {
         return ProductImpl.instance;
     }
 
-    public boolean addProduct(Product product) {
+    public void addProduct(Product product) {
         try {
-            if (productValidator.isValidateProduct(product)) {
                 productDao.addProduct(product);
-            }
         }
         catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        return false;
         }
 
     public void removeProductById(Long id) {

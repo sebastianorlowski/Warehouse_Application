@@ -89,7 +89,7 @@ public class UserValidator {
         return false;
     }
 
-    private boolean isUserAlreadyExist(String login) {
+    public boolean isUserAlreadyExist(String login) {
         List<User> users;
         users = userDao.getAllUsers();
         for(User user : users) {

@@ -14,15 +14,13 @@ import java.util.List;
 public interface UserService {
 
     void addUser(User user);
-    boolean removeUserByLogin(String login);
-    boolean updateUserPassword(String login, String password, String newPassword);
-    boolean updateUserEmail(String login, String email, String newEmail);
+    void removeUserByLogin(String login);
+    void updateUserPassword(String login, String password, String newPassword);
+    void updateUserEmail(String login, String email, String newEmail);
     void updateUserRole(String login, Integer roleId);
     List<User> findUserByLogin(String login);
     List<User> findUserByEmail(String email);
-    Integer getUserRole(String login);
     ObservableList<User> getAllUsers();
     boolean isCorrectLoginAndPassword(String login, String password);
     boolean isCorrectLoginAndEmail(String login, String email);
-
 }

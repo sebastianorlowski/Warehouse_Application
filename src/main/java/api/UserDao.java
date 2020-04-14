@@ -2,15 +2,9 @@ package api;
 
 import entity.User;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public interface UserDao {
-    List<User> users = new LinkedList<User>();
-
     void addUser(User user);
     void removeUserByLogin(String login);
     void updateUserPassword(String login, String password, String newPassword);
@@ -22,5 +16,4 @@ public interface UserDao {
     boolean isCorrectLoginAndPassword(String login, String password);
     boolean isCorrectLoginAndEmail(String login, String email);
     ObservableList<User> getAllUsers();
-
 }

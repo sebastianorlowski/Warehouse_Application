@@ -144,7 +144,13 @@ public class UserDaoImpl implements UserDao {
                 Integer roleId = resultSet.getInt("user_role_id");
                 UserRole userRole = userRoleDao.getRoleById(roleId);
 
-                User user = new User(id, login, password, email, userRole);
+                User user = new User.Builder().setId(id)
+                        .setLogin(login)
+                        .setPassword(password)
+                        .setEmail(email)
+                        .setUserRole(userRole)
+                        .build();
+
                 users.add(user);
             }
         statement.close();
@@ -171,7 +177,12 @@ public class UserDaoImpl implements UserDao {
                 Integer roleId = resultSet.getInt("user_role_id");
                 UserRole userRole = userRoleDao.getRoleById(roleId);
 
-                User user = new User(id, login, password, email, userRole);
+                User user = new User.Builder().setId(id)
+                        .setLogin(login)
+                        .setPassword(password)
+                        .setEmail(email)
+                        .setUserRole(userRole)
+                        .build();
                 users.add(user);
             }
             statement.close();
@@ -198,7 +209,12 @@ public class UserDaoImpl implements UserDao {
                 Integer roleId = resultSet.getInt("user_role_id");
                 UserRole userRole = userRoleDao.getRoleById(roleId);
 
-                User user = new User(id, login, password, email, userRole);
+                User user = new User.Builder().setId(id)
+                        .setLogin(login)
+                        .setPassword(password)
+                        .setEmail(email)
+                        .setUserRole(userRole)
+                        .build();
                 users.add(user);
             }
             statement.close();

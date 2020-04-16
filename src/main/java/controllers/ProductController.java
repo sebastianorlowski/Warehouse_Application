@@ -56,7 +56,15 @@ public class ProductController {
             String size = fieldSize.getText();
             String material = fieldMaterial.getText();
 
-            Product product = new Product(1L, name, price, weight, color, productCount, size, material);
+            Product product = new Product.Builder().setId(1L)
+                    .setName(name)
+                    .setPrice(price)
+                    .setWeight(weight)
+                    .setColor(color)
+                    .setProductCount(productCount)
+                    .setSize(size)
+                    .setMaterial(material)
+                    .build();
             try {
                 if (productValidator.isValidateProduct(product)) {
                     productService.addProduct(product);
@@ -85,7 +93,15 @@ public class ProductController {
             String size = fieldSize.getText();
             String material = fieldMaterial.getText();
 
-            Product product = new Product(id, name, price, weight, color, productCount, size, material);
+            Product product = new Product.Builder().setId(id)
+                    .setName(name)
+                    .setPrice(price)
+                    .setWeight(weight)
+                    .setColor(color)
+                    .setProductCount(productCount)
+                    .setSize(size)
+                    .setMaterial(material)
+                    .build();
             try {
                 if (productValidator.isValidateUpdateProduct(product)) {
                     productService.updateProduct(product);

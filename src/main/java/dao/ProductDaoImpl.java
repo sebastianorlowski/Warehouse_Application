@@ -112,7 +112,16 @@ public class ProductDaoImpl implements ProductDao {
                 String size = resultSet.getString("size");
                 String material = resultSet.getString("material");
 
-                Product product = new Product(id, name, price, weight, color, productCount, size, material);
+                Product product = new Product.Builder().setId(id)
+                        .setName(name)
+                        .setPrice(price)
+                        .setWeight(weight)
+                        .setColor(color)
+                        .setProductCount(productCount)
+                        .setSize(size)
+                        .setMaterial(material)
+                        .build();
+
                 products.add(product);
             }
         }
@@ -141,7 +150,15 @@ public class ProductDaoImpl implements ProductDao {
                 String size = resultSet.getString("size");
                 String material = resultSet.getString("material");
 
-                Product product = new Product(id, name, price, weight, color, productCount, size, material);
+                Product product = new Product.Builder().setId(id)
+                        .setName(name)
+                        .setPrice(price)
+                        .setWeight(weight)
+                        .setColor(color)
+                        .setProductCount(productCount)
+                        .setSize(size)
+                        .setMaterial(material)
+                        .build();
                 products.add(product);
             }
 

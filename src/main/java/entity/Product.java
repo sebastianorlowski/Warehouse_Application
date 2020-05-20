@@ -1,5 +1,8 @@
 package entity;
 import enums.Color;
+
+import java.util.Objects;
+
 public class Product {
     private Long id;
     private String name;
@@ -66,8 +69,23 @@ public class Product {
     }
 
     @Override
-    public String toString() {
-        return id + name + price + weight + color + productCount + size + material;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id.equals(product.id) &&
+                name.equals(product.name) &&
+                price.equals(product.price) &&
+                weight.equals(product.weight) &&
+                color == product.color &&
+                productCount.equals(product.productCount) &&
+                size.equals(product.size) &&
+                material.equals(product.material);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * id.hashCode() + 13 * name.hashCode() + 17 * price.hashCode();
     }
 
     public static class Builder {

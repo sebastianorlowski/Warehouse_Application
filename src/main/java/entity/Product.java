@@ -1,8 +1,6 @@
 package entity;
 import enums.Color;
 
-import java.util.Objects;
-
 public class Product {
     private Long id;
     private String name;

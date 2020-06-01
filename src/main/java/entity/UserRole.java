@@ -3,8 +3,8 @@ package entity;
 import enums.Role;
 
 public class UserRole {
-    Integer id;
-    Role role;
+    private Integer id;
+    private Role role;
 
 
     public UserRole(Integer id, Role role) {

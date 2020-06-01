@@ -6,7 +6,7 @@ import entity.User;
 import service.UserImpl;
 
 public class UserFacadeImpl implements UserFacade {
-    private static UserService userService = UserImpl.getInstance();
+    private final static UserService userService = UserImpl.getInstance();
     private static UserFacadeImpl instance = null;
 
     public static UserFacadeImpl getInstance() {

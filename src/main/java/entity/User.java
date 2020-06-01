@@ -1,7 +1,5 @@
 package entity;
 
-import enums.Role;
-
 public class User {
 
     private Long id;
@@ -63,10 +61,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
     }
 
     @Override

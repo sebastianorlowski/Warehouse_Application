@@ -12,8 +12,8 @@ import java.util.List;
 
 public class UserImpl implements UserService {
 
-    private UserValidator userValidator = UserValidator.getInstance();
-    private UserDao userDao = UserDaoImpl.getInstance();
+    private final UserValidator userValidator = UserValidator.getInstance();
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     private static UserImpl instance = null;
 
@@ -51,8 +51,7 @@ public class UserImpl implements UserService {
     public void updateUserEmail(String login, String email, String newEmail) {
         try {
             userDao.updateUserEmail(login, email, newEmail);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

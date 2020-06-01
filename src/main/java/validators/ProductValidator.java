@@ -9,12 +9,12 @@ import exceptions.products.*;
 import java.util.List;
 
 public class ProductValidator {
-    private ProductDao productDao = ProductDaoImpl.getInstance();
+    private final ProductDao productDao = ProductDaoImpl.getInstance();
 
     private static ProductValidator instance = null;
 
     public static ProductValidator getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ProductValidator();
         }
         return instance;
@@ -27,19 +27,19 @@ public class ProductValidator {
 
     public boolean isValidateProduct(Product product) throws ProductCountMinimumException, ProductNameCannotBeEmptyException,
             ProductNameEnoughLengthException, ProductPriceMinimumException, ProductWeightMinimumException {
-        if(productCount(product.getProductCount())) {
+        if (productCount(product.getProductCount())) {
             throw new ProductCountMinimumException("Product count cannot be 0 or less!");
         }
-        if(productNameEmpty(product.getName())) {
+        if (productNameEmpty(product.getName())) {
             throw new ProductNameCannotBeEmptyException("Product name cannot be empty!");
         }
-        if(productNameEnoughLength(product.getName())) {
+        if (productNameEnoughLength(product.getName())) {
             throw new ProductNameEnoughLengthException("Product name is too long! Maximum 50 letters!");
         }
-        if(productPriceMinimum(product.getPrice())) {
+        if (productPriceMinimum(product.getPrice())) {
             throw new ProductPriceMinimumException("Product price cannot be 0 or less!");
         }
-        if(productWeightMinimum(product.getWeight())) {
+        if (productWeightMinimum(product.getWeight())) {
             throw new ProductWeightMinimumException("Product weight cannot be 0 or less!");
         }
         return true;
@@ -85,8 +85,8 @@ public class ProductValidator {
     public boolean productIsAlreadyExistId(Long id) {
         List<Product> products;
         products = productDao.getAllProducts();
-        for(Product product : products) {
-            if(id.equals(product.getId())) {
+        for (Product product : products) {
+            if (id.equals(product.getId())) {
                 return true;
             }
         }

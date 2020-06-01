@@ -5,15 +5,13 @@ import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
 import javafx.collections.ObservableList;
-import validators.ProductValidator;
 
 import java.util.List;
 
 public class ProductImpl implements ProductService {
-    private ProductValidator productValidator = ProductValidator.getInstance();
-    private ProductDao productDao = ProductDaoImpl.getInstance();
+    private final ProductDao productDao = ProductDaoImpl.getInstance();
 
-    private static ProductService instance = new ProductImpl();
+    private final static ProductService instance = new ProductImpl();
     public static ProductService getInstance() {
         return ProductImpl.instance;
     }
@@ -21,8 +19,7 @@ public class ProductImpl implements ProductService {
     public void addProduct(Product product) {
         try {
             productDao.addProduct(product);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -30,8 +27,7 @@ public class ProductImpl implements ProductService {
     public void removeProductById(Long id) {
         try {
             productDao.removeProductById(id);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -39,8 +35,7 @@ public class ProductImpl implements ProductService {
     public void updateProduct(Product product) {
         try {
             productDao.updateProduct(product);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
                     }
     }
@@ -50,10 +45,10 @@ public class ProductImpl implements ProductService {
     }
 
     public Product findProductById(Long id) {
-        List<Product> products = null;
+        List<Product> products;
         products = productDao.getAllProducts();
-        for(Product product : products) {
-            if(id.equals(product.getId())) {
+        for (Product product : products) {
+            if (id.equals(product.getId())) {
                 return product;
             }
         }

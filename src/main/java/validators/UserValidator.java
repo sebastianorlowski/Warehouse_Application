@@ -8,12 +8,12 @@ import java.util.List;
 
 public class UserValidator {
 
-    private UserDao userDao = UserDaoImpl.getInstance();
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     private static UserValidator instance = null;
 
     public static UserValidator getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserValidator();
         }
         return instance;
@@ -27,14 +27,14 @@ public class UserValidator {
     public boolean isValidateAddUser(User user) throws UserEmailAlreadyExist, UserLoginIsExistException, UserLoginEnoughLengthException,
             UserPasswordEnoughLengthException,
             UserPasswordIsOneCharUpCaseException {
-        if(isLoginEnoughLength(user.getLogin())) {
+        if (isLoginEnoughLength(user.getLogin())) {
             throw new UserLoginEnoughLengthException("Login must have min 5 and max 20 letters!");
         }
-            if(isPasswordEnoughLength(user.getPassword())) {
+            if (isPasswordEnoughLength(user.getPassword())) {
                 throw new UserPasswordEnoughLengthException("Password must have min 8 and max 20 letters!");
             }
 
-            if(isPasswordOneCharUpperCase(user.getPassword())) {
+            if (isPasswordOneCharUpperCase(user.getPassword())) {
                 throw new UserPasswordIsOneCharUpCaseException("Password must have one uppercase letter!");
             }
 
@@ -42,7 +42,7 @@ public class UserValidator {
                 throw new UserLoginIsExistException("Login is already exist!");
             }
 
-            if(isEmailAlreadyExist(user.getEmail())) {
+            if (isEmailAlreadyExist(user.getEmail())) {
                 throw new UserEmailAlreadyExist("Email is already exist!");
             }
         return true;
@@ -51,11 +51,11 @@ public class UserValidator {
     public boolean isValidateUpdateUserPassword(String newPassword) throws UserPasswordEnoughLengthException,
             UserPasswordIsOneCharUpCaseException {
 
-        if(isPasswordEnoughLength(newPassword)) {
+        if (isPasswordEnoughLength(newPassword)) {
             throw new UserPasswordEnoughLengthException("Password must be min 8 and max 20 letters!");
         }
 
-        if(isPasswordOneCharUpperCase(newPassword)) {
+        if (isPasswordOneCharUpperCase(newPassword)) {
             throw new UserPasswordIsOneCharUpCaseException("Password must have one uppercase letter!");
         }
        return true;
@@ -70,8 +70,8 @@ public class UserValidator {
     }
 
     private boolean isPasswordOneCharUpperCase(String password) {
-        for(char checkUpperCase : password.toCharArray()) {
-            if(Character.isUpperCase(checkUpperCase)) {
+        for (char checkUpperCase : password.toCharArray()) {
+            if (Character.isUpperCase(checkUpperCase)) {
                 return false;
             }
         }
@@ -81,8 +81,8 @@ public class UserValidator {
     public boolean isEmailAlreadyExist(String email) {
         List<User> users;
         users = userDao.getAllUsers();
-        for(User user : users) {
-            if(user.getEmail().equals(email)) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
                 return true;
             }
         }
@@ -92,8 +92,8 @@ public class UserValidator {
     public boolean isUserAlreadyExist(String login) {
         List<User> users;
         users = userDao.getAllUsers();
-        for(User user : users) {
-            if(user.getLogin().equals(login)) {
+        for (User user : users) {
+            if (user.getLogin().equals(login)) {
                 return true;
             }
         }

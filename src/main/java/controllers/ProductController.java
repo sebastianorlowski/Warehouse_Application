@@ -18,8 +18,8 @@ import service.ProductImpl;
 import validators.ProductValidator;
 
 public class ProductController {
-    private static ProductService productService = ProductImpl.getInstance();
-    private static ProductValidator productValidator = ProductValidator.getInstance();
+    private final static ProductService productService = ProductImpl.getInstance();
+    private final static ProductValidator productValidator = ProductValidator.getInstance();
 
     @FXML
     TextField fieldName;
@@ -71,12 +71,10 @@ public class ProductController {
                     buttonGetAllProducts();
                     labelInfo.setText("You add product!");
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 labelInfo.setText(e.getMessage());
             }
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             labelInfo.setText("SOMETHING WENT WRONG!");
         }
             }
@@ -112,8 +110,7 @@ public class ProductController {
             } catch (Exception e) {
                 labelInfo.setText(e.getMessage());
             }
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
                 labelInfo.setText("SOMETHING WENT WRONG!");
             }
         }
@@ -132,7 +129,7 @@ public class ProductController {
     public void buttonRemoveProduct() {
         Product selectedItem = tableView.getSelectionModel().getSelectedItem();
         Long id = selectedItem.getId();
-        if(productValidator.productIsAlreadyExistId(id)) {
+        if (productValidator.productIsAlreadyExistId(id)) {
             productService.removeProductById(id);
             buttonGetAllProducts();
             buttonClearFields();
@@ -227,8 +224,10 @@ public class ProductController {
 
         tableView.setItems(getProduct);
     }
+
     @FXML
     Label labelID;
+
     public void mouseGetDataByPress() {
         Product selectedItem = tableView.getSelectionModel().getSelectedItem();
         Long id = selectedItem.getId();

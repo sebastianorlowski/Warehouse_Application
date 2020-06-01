@@ -21,9 +21,9 @@ import service.UserImpl;
 import validators.UserValidator;
 
 public class AdminAccessController {
-    private static UserService userService = UserImpl.getInstance();
-    private static UserValidator userValidator = UserValidator.getInstance();
-    private static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
+    private final static UserService userService = UserImpl.getInstance();
+    private final static UserValidator userValidator = UserValidator.getInstance();
+    private final static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
 
     @FXML
     TextField fieldLoginPassword;
@@ -70,19 +70,17 @@ public class AdminAccessController {
         String email = fieldOldEmail.getText();
         String newEmail = fieldNewEmail.getText();
 
-        if(userService.isCorrectLoginAndEmail(login,email)) {
+        if (userService.isCorrectLoginAndEmail(login,email)) {
             if (userValidator.isEmailAlreadyExist(newEmail)) {
                 labelEmailInfo.setText("Email is already exist!");
-            }
-            else {
+            } else {
                 userService.updateUserEmail(login, email, newEmail);
                 labelEmailInfo.setText("You changed email!");
                 fieldLoginEmail.clear();
                 fieldOldEmail.clear();
                 fieldNewEmail.clear();
             }
-        }
-        else {
+        } else {
             labelEmailInfo.setText("Wrong login or email");
         }
     }
@@ -112,11 +110,10 @@ public class AdminAccessController {
 
     public void buttonRemoveUser() {
         String login = fieldRemoveUser.getText();
-        if(userValidator.isUserAlreadyExist(login)) {
-        userService.removeUserByLogin(login);
-        labelRemoveInfo.setText("You removed " + login);
-        }
-        else {
+        if (userValidator.isUserAlreadyExist(login)) {
+            userService.removeUserByLogin(login);
+            labelRemoveInfo.setText("You removed " + login);
+        } else {
             labelRemoveInfo.setText("This login is not exist!");
         }
     }

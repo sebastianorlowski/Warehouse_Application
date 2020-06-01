@@ -17,10 +17,8 @@ import javafx.stage.Stage;
 import validators.UserValidator;
 
 public class RegisterController {
-    String login, password, email;
-    final String role = "USER";
-    private static UserFacade userFacade = UserFacadeImpl.getInstance();
-    private static UserValidator userValidator = UserValidator.getInstance();
+    private final static UserFacade userFacade = UserFacadeImpl.getInstance();
+    private final static UserValidator userValidator = UserValidator.getInstance();
 
     @FXML
     TextField fieldLogin;
@@ -32,18 +30,18 @@ public class RegisterController {
     Label labelValidator;
 
     public void isRegister() {
-        login = fieldLogin.getText();
-        password = fieldPassword.getText();
-        email = fieldEmail.getText();
+        String login = fieldLogin.getText();
+        String password = fieldPassword.getText();
+        String email = fieldEmail.getText();
 
+        String role = "USER";
         User user = new User(login, password, email, new UserRole(Role.valueOf(role)));
         try {
             if (userValidator.isValidateAddUser(user)) {
                 userFacade.registerUser(user);
                 labelValidator.setText("Registration successfully!");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             labelValidator.setText(e.getMessage());
         }
     }

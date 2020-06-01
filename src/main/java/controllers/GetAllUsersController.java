@@ -9,7 +9,7 @@ import javafx.scene.control.ListView;
 import service.UserImpl;
 
 public class GetAllUsersController {
-    private static UserService userService = UserImpl.getInstance();
+    private final static UserService userService = UserImpl.getInstance();
 
     @FXML
     ListView<User> listUsers;

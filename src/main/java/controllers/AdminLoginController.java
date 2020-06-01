@@ -16,10 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AdminLoginController {
-    private static UserFacade userFacade = UserFacadeImpl.getInstance();
-    private static UserDao userDao = UserDaoImpl.getInstance();
-    String login, password;
-    Integer role;
+    private final static UserFacade userFacade = UserFacadeImpl.getInstance();
+    private final static UserDao userDao = UserDaoImpl.getInstance();
+    private Integer role;
 
     @FXML
     TextField loginField;
@@ -29,8 +28,8 @@ public class AdminLoginController {
     Label labelInfo;
 
     public boolean isCorrectLoginAndPassword() {
-        login = loginField.getText();
-        password = passwordField.getText();
+        String login = loginField.getText();
+        String password = passwordField.getText();
         role = userDao.getUserRole(login);
         return userFacade.loginUser(login, password);
     }
@@ -46,12 +45,10 @@ public class AdminLoginController {
                 window.setScene(adminPanelScene);
                 window.centerOnScreen();
                 window.show();
-            }
-            else {
+            } else {
                 labelInfo.setText("You havent access!");
             }
-    }
-        else {
+        } else {
         labelInfo.setText("Wrong login or password!");
         }
     }

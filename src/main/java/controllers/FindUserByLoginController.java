@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import service.UserImpl;
 
 public class FindUserByLoginController {
-    private static UserService userService = UserImpl.getInstance();
+    private final static UserService userService = UserImpl.getInstance();
 
     @FXML
     TextField fieldGetLogin;

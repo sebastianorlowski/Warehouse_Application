@@ -15,8 +15,8 @@ import validators.UserValidator;
 
 public class UserAccessController {
 
-    private static UserService userService = UserImpl.getInstance();
-    private static UserValidator userValidator = UserValidator.getInstance();
+    private final static UserService userService = UserImpl.getInstance();
+    private final static UserValidator userValidator = UserValidator.getInstance();
 
     @FXML
     TextField fieldLogin;
@@ -33,17 +33,15 @@ public class UserAccessController {
        String newPassword = fieldNewPassword.getText();
        try {
            if (userService.isCorrectLoginAndPassword(login, password)) {
-                   if (userValidator.isValidateUpdateUserPassword(newPassword)) {
-                       userService.updateUserPassword(login, password, newPassword);
-                       labelPasswordInfo.setText("You changed password!");
-                       clearTextFields();
-                   }
+               if (userValidator.isValidateUpdateUserPassword(newPassword)) {
+                   userService.updateUserPassword(login, password, newPassword);
+                   labelPasswordInfo.setText("You changed password!");
+                   clearTextFields();
                }
-           else {
+           } else {
                labelPasswordInfo.setText("Wrong login or password");
            }
-       }
-       catch (Exception e) {
+       } catch (Exception e) {
            labelPasswordInfo.setText(e.getMessage());
        }
     }

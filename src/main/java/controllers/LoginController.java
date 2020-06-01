@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class LoginController {
     String login, password;
-    private static UserFacade userFacade = UserFacadeImpl.getInstance();
+    private final static UserFacade userFacade = UserFacadeImpl.getInstance();
 
     public void buttonGoToRegister(ActionEvent event) throws Exception{
         Parent registerPageParent = FXMLLoader.load(getClass().getResource("/registerpage.fxml"));
@@ -48,8 +48,7 @@ public class LoginController {
             window.centerOnScreen();
             window.setResizable(false);
             window.show();
-        }
-        else {
+        } else {
             Parent isNotLoggedInPageParent = FXMLLoader.load(getClass().getResource("/isnotloggedinpage.fxml"));
             Scene isNotLoggedInPageScene = new Scene(isNotLoggedInPageParent);
             window.setTitle("");

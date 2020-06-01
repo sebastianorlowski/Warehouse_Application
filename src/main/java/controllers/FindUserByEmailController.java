@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import service.UserImpl;
 
 public class FindUserByEmailController {
-    private static UserService userService = UserImpl.getInstance();
+    private final static UserService userService = UserImpl.getInstance();
     @FXML
     TextField fieldGetUserByEmail;
     @FXML

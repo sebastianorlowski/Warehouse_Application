@@ -2,3 +2,5 @@
 #
 # Aplikacja ta została stworzona na podstawie kursu z strony 1024kb.pl. Kurs nie był kompletny, więc w pewnym momencie
 # bardzo zmodyfikowałem aplikację by nauczyć się nowych rzeczy i dociągnąć do końca projekt.
+#
+# Aplikacja służy do wglądu w zawartość magazynu. Możemy dodawać, usuwać, modyfikować, wyszukiwać przedmioty na magazynie.

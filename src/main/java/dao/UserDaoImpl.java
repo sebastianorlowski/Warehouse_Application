@@ -14,7 +14,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private final static UserDao instance = new UserDaoImpl();
-    private static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
+    private final static UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
 
     private Connection connection;
     private final String databaseName = "warehouse";
@@ -33,9 +33,8 @@ public class UserDaoImpl implements UserDao {
     private void init() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/"+databaseName+"?useSSL=false", user, password);
-        }
-        catch(Exception e) {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?useSSL=false", user, password);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -53,8 +52,7 @@ public class UserDaoImpl implements UserDao {
 
             statement.execute();
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -68,8 +66,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, login);
             statement.execute();
             statement.close();
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -86,8 +83,7 @@ public class UserDaoImpl implements UserDao {
             statement.executeUpdate();
 
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -104,8 +100,7 @@ public class UserDaoImpl implements UserDao {
             statement.executeUpdate();
 
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -121,8 +116,7 @@ public class UserDaoImpl implements UserDao {
             statement.executeUpdate();
 
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -136,7 +130,7 @@ public class UserDaoImpl implements UserDao {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
@@ -153,9 +147,8 @@ public class UserDaoImpl implements UserDao {
 
                 users.add(user);
             }
-        statement.close();
-        }
-        catch (SQLException e) {
+            statement.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
@@ -169,7 +162,7 @@ public class UserDaoImpl implements UserDao {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 login = resultSet.getString("login");
                 String password = resultSet.getString("password");
@@ -186,8 +179,7 @@ public class UserDaoImpl implements UserDao {
                 users.add(user);
             }
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
@@ -201,7 +193,7 @@ public class UserDaoImpl implements UserDao {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
@@ -218,8 +210,7 @@ public class UserDaoImpl implements UserDao {
                 users.add(user);
             }
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
@@ -233,14 +224,13 @@ public class UserDaoImpl implements UserDao {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Integer roleId = resultSet.getInt("user_role_id");
 
                 return roleId;
             }
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -253,13 +243,12 @@ public class UserDaoImpl implements UserDao {
                 String query = "select * from " + tableName + " where login = '" + login + "' and password = '" + password + "';";
                 statement = connection.prepareStatement(query);
                 ResultSet resultSet = statement.executeQuery(query);
-                if(resultSet.next()) {
+                if (resultSet.next()) {
                     return true;
                 }
                 statement.close();
             }
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -268,17 +257,16 @@ public class UserDaoImpl implements UserDao {
     public boolean isCorrectLoginAndEmail(String login, String email) {
         PreparedStatement statement;
         try {
-            if(login != null && email != null) {
-                String query = "select * from " + tableName + " where login = '" + login + "' and email = '" + email +"';";
+            if (login != null && email != null) {
+                String query = "select * from " + tableName + " where login = '" + login + "' and email = '" + email + "';";
                 statement = connection.prepareStatement(query);
                 ResultSet resultSet = statement.executeQuery(query);
-            if(resultSet.next()) {
-                return true;
+                if (resultSet.next()) {
+                    return true;
+                }
+                statement.close();
             }
-            statement.close();
-            }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;

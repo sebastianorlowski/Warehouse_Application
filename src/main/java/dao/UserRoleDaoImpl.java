@@ -26,8 +26,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?useSSL=false", user, password);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -40,12 +39,11 @@ public class UserRoleDaoImpl implements UserRoleDao {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
                 return id;
             }
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -66,8 +64,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
                 return new UserRole(id, userRole);
             }
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

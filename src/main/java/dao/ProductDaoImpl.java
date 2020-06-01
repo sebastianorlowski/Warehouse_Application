@@ -8,17 +8,14 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 
 public class ProductDaoImpl implements ProductDao {
-    private static ProductDao instance = new ProductDaoImpl();
+    private final static ProductDao instance = new ProductDaoImpl();
     public static ProductDao getInstance() {
         return ProductDaoImpl.instance;
     }
 
     private Connection connection;
-    private final String databaseName = "warehouse";
-    private String tableName = "product";
-    private final String user = "root";
-    private final String password = "respeck";
-    String query;
+    private final String tableName = "product";
+    private String query;
 
     public ProductDaoImpl() {
         init();
@@ -27,9 +24,11 @@ public class ProductDaoImpl implements ProductDao {
     public void init() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?useSSL=false" , user, password);
-        }
-        catch (Exception e) {
+            String databaseName = "warehouse";
+            String user = "root";
+            String password = "respeck";
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?useSSL=false", user, password);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -49,8 +48,7 @@ public class ProductDaoImpl implements ProductDao {
             statement.execute();
 
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -64,8 +62,7 @@ public class ProductDaoImpl implements ProductDao {
             statement.execute();
 
             statement.close();
-        }
-        catch(SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
@@ -87,8 +84,7 @@ public class ProductDaoImpl implements ProductDao {
             statement.executeUpdate();
 
             statement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -102,7 +98,7 @@ public class ProductDaoImpl implements ProductDao {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 Float price = resultSet.getFloat("price");
@@ -124,9 +120,7 @@ public class ProductDaoImpl implements ProductDao {
 
                 products.add(product);
             }
-        }
-
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return products;
@@ -135,12 +129,12 @@ public class ProductDaoImpl implements ProductDao {
     public ObservableList<Product> getAllProducts(){
         ObservableList<Product> products = FXCollections.observableArrayList();
         PreparedStatement statement;
-        try  {
+        try {
             query = "select * from " + tableName;
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 Float price = resultSet.getFloat("price");
@@ -161,9 +155,7 @@ public class ProductDaoImpl implements ProductDao {
                         .build();
                 products.add(product);
             }
-
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return products;
